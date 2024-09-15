@@ -22,7 +22,7 @@ export default function HeroHome() {
               <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
                 <div>
                   <Link className="btn text-white bg-blue-600 hover:bg-blue-700 w-full group" href="/request-demo">
-                    Request Demo <span className="tracking-normal text-blue-300 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
+                    Check out our Demo <span className="tracking-normal text-blue-300 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                   </Link>
                 </div>
                 <div>
@@ -31,7 +31,7 @@ export default function HeroHome() {
               </div>
             </div>
 
-            {/* Hero image */}
+            {/* Hero image
             <ModalVideo01
               thumb={VideoThumb}
               thumbWidth={540}
@@ -39,7 +39,7 @@ export default function HeroHome() {
               thumbAlt="Modal video thumbnail"
               video="/videos/video.mp4"
               videoWidth={1920}
-              videoHeight={1080} />            
+              videoHeight={1080} />             */}
 
           </div>
 

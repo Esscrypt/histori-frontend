@@ -3,10 +3,10 @@ import { getBlogPosts, getDocumentation } from '@/components/mdx/utils'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import PostDate from '@/components/post-date'
 import { CustomMDX } from '@/components/mdx/mdx'
 import Separator from '@/components/separator'
 import Newsletter from '@/components/newsletter'
+import PostDate from '@/components/posts/post-date'
 
 export async function generateStaticParams() {
   const allBlogs = getBlogPosts();
