@@ -1,11 +1,10 @@
 'use client'
 
 
+import { EMAIL_VALIDATION } from '@/config';
 import axiosInstance from '@/lib/axios/axiosInstance'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-const EMAIL_VALIDATION = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-const PW_VALIDATION = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/
 
     const Register = () => {
 
@@ -49,6 +48,18 @@ const handleRepeatPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   const value = e.target.value;
   setRepeatPassword(value);
 }
+
+const comparePasswords = () => {
+  if (password !== repeatPassword) {
+    setError('Passwords do not match');
+  }
+}
+
+useEffect(() => {
+  comparePasswords();
+}
+, [password, repeatPassword]);
+
 
       const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
@@ -117,6 +128,7 @@ const handleRepeatPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                 // pattern={PW_VALIDATION}
               />
             </div>
+            {error && <p className="text-sm font-bold text-rose-500">{error}</p>}
           </div>
           <div className="mt-6">
             <button className="btn-sm w-full text-sm text-white bg-blue-600 hover:bg-blue-700 group">
