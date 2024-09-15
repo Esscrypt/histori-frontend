@@ -1,5 +1,3 @@
-'use client'
-
 import { useEffect, useRef } from 'react'
 import { Transition } from '@headlessui/react'
 
@@ -53,7 +51,6 @@ export default function Modal({
         leave="transition ease-out duration-100"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
-        className="fixed inset-0 z-50 bg-black bg-opacity-75 transition-opacity"
         aria-hidden="true"
       />
 
@@ -66,9 +63,6 @@ export default function Modal({
         leave="ttransition ease-out duration-200"
         leaveFrom="oopacity-100 scale-100"
         leaveTo="opacity-0 scale-95"
-        id={id}
-        className="fixed inset-0 z-50 overflow-hidden flex items-center justify-center transform px-4 sm:px-6"
-        role="dialog"
         aria-modal="true"
         aria-labelledby={ariaLabel}          
       >        

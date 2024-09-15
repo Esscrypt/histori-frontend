@@ -89,8 +89,13 @@ export default function MobileMenu() {
                 </li>
               </ul>
             </li>
+            {/* Should appear only if the user is not signed in i.e. Login Links TODO:*/}
+
             <li>
               <Link href="/signin" className="flex font-medium w-full text-slate-800 hover:text-blue-600 py-2" onClick={() => setMobileNavOpen(false)}>Sign in</Link>
+            </li>
+            <li>
+              <Link href="/signup" className="flex font-medium w-full text-slate-800 hover:text-blue-600 py-2" onClick={() => setMobileNavOpen(false)}>Sign up</Link>
             </li>
             <li>
               <Link href="/request-demo" className="flex font-medium text-blue-600 py-2 group" onClick={() => setMobileNavOpen(false)}>
