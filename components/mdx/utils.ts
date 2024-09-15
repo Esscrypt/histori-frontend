@@ -54,3 +54,6 @@ function getMDXData(dir: string) {
 export function getBlogPosts() {
   return getMDXData(path.join(process.cwd(), "content/blog"));
 }
+export function getDocumentation() {
+  return getMDXData(path.join(process.cwd(), "content/docs"));
+}

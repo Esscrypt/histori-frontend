@@ -3,7 +3,7 @@ export const metadata = {
   description: 'Page description',
 }
 
-import Hero from '@/components/hero-support'
+import Hero from '@/components/hero/hero-support'
 import Content from './content'
 
 export default function Support() {

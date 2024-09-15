@@ -1,4 +1,4 @@
-import PricingTables from './pricing-tables';
+import PricingTables from '../pricing/pricing-tables';
 
 export default function HeroPricing() {  
   return (

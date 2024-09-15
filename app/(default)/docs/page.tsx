@@ -1,4 +1,4 @@
-import { getBlogPosts } from '@/components/mdx/utils'
+import { getBlogPosts, getDocumentation } from '@/components/mdx/utils'
 import Link from 'next/link'
 import Image from 'next/image'
 import PostItem from '@/components/posts/post-item'
@@ -10,27 +10,26 @@ export const metadata = {
 }
 
 import Hero from '@/components/hero/hero-blog'
-import BlogTags from '@/components/tags/blog-tags'
+import DocTags from '@/components/tags/doc-tags'
 import PostDate from '@/components/posts/post-date'
+import HeroDocs from '@/components/hero/hero-docs'
 
 export default function Blog() {
-  const allBlogs = getBlogPosts();
+  const allDocs = getDocumentation();
 
   // Sort posts by date
-  allBlogs.sort((a, b) => {
+  allDocs.sort((a, b) => {
     return (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) ? -1 : 1
   })
   
   // Slicing content for demo purposes
-  const featuredPost = allBlogs[0]
-  const latestPosts = allBlogs.slice(1,4)
-  const popularPosts = allBlogs.slice(4, 7)
-  const productPosts = allBlogs.slice(7, 10)
+  const featuredPost = allDocs[0]
+  const latestPosts = allDocs.slice(1,4)
 
   return (
     <>
-      <Hero />
-      <BlogTags />
+      <HeroDocs />
+      <DocTags />
 
       {/* Featured article */}
       <section>
@@ -98,31 +97,8 @@ export default function Blog() {
               </div>
             </div>
 
-            {/* Popular */}
-            <div>
-              <h2 className="h3 font-playfair-display text-center md:text-left mb-8">Popular</h2>
-
-              {/* Articles container */}
-              <div className="max-w-sm mx-auto md:max-w-none grid gap-12 md:grid-cols-3 md:gap-x-6 md:gap-y-8 items-start">
-                {popularPosts.map((post, postIndex) => (
-                  <PostItem key={postIndex} {...post} />
-                ))}
-              </div>
-            </div>
 
             <CtaBox />
-
-            {/* Product & News */}
-            <div>
-              <h2 className="h3 font-playfair-display text-center md:text-left mb-8">Product &amp; News</h2>
-
-              {/* Articles container */}
-              <div className="max-w-sm mx-auto md:max-w-none grid gap-12 md:grid-cols-3 md:gap-x-6 md:gap-y-8 items-start">
-                {productPosts.map((post, postIndex) => (
-                  <PostItem key={postIndex} {...post} />
-                ))}
-              </div>
-            </div>
 
             {/* See All Articles */}
             <div className="text-center">

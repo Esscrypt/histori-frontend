@@ -69,7 +69,7 @@ export default function Customers() {
               {/* Content */}
               <div className="md:min-w-[30rem]" data-aos="fade-left">
                 <h2 className="h3 md:text-4xl font-playfair-display mb-4">
-                  <Link className="text-slate-800 hover:underline hover:decoration-blue-100" href="/wall-of-love//wall-of-love-single">Leon Fibre S.r.l.</Link>
+                  <Link className="text-slate-800 hover:underline hover:decoration-blue-100" href="">Leon Fibre S.r.l.</Link>
                 </h2>
                 <p className="text-lg text-slate-500 border-l-2 border-slate-800 pl-4 mb-8">Professional communication studio Leon didn't get the personalized approach they wanted from colloboration tools - until they met Tidy.</p>
                 <div className="space-y-3">
@@ -112,7 +112,7 @@ export default function Customers() {
               {/* Content */}
               <div className="md:min-w-[30rem]" data-aos="fade-left">
                 <h2 className="h3 md:text-4xl font-playfair-display mb-4">
-                  <Link className="text-slate-800 hover:underline hover:decoration-blue-100" href="/wall-of-love//wall-of-love-single">CD International</Link>
+                  <Link className="text-slate-800 hover:underline hover:decoration-blue-100" href="#">CD International</Link>
                 </h2>
                 <p className="text-lg text-slate-500 border-l-2 border-slate-800 pl-4 mb-8">Award-winning design firm Black Inc. didn't get the personalized approach they wanted from colloboration tools - until they met Tidy.</p>
                 <div className="space-y-3">
