@@ -10,7 +10,7 @@ export default function HeroSupport() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="h1 font-playfair-display text-slate-100 mb-8">Advice and answers from the Tidy Team</h1>
+            <h1 className="h1 font-playfair-display text-slate-100 mb-8">Advice and answers from the Histori Team</h1>
             {/* Search form */}
             <form className="relative flex items-center mt-8">
               <input type="search" className="form-input w-full bg-slate-800 border border-slate-700 focus:border-slate-600 text-white placeholder-slate-500 pl-12" placeholder="Search for articles…" aria-label="Search for articles" />
