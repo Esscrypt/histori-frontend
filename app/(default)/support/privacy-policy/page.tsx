@@ -3,13 +3,13 @@ import { getPrivacyPolicy } from '@/components/mdx/utils'
 import { CustomMDX } from '@/components/mdx/mdx'
 import HeroDocs from '@/components/hero/hero-docs'
 
-export async function generateStaticParams() {
-  const content = getPrivacyPolicy();
+// export function generateStaticParams() {
+//   const content = getPrivacyPolicy();
 
-  return content;
-}
+//   return content;
+// }
 
-export default async function Terms() {
+export default function Terms() {
   const content = getPrivacyPolicy();
 
   return (

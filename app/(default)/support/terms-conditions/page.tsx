@@ -1,16 +1,13 @@
 import { getTermsAndConditionsContent } from '@/components/mdx/utils'
 
 import { CustomMDX } from '@/components/mdx/mdx'
-import Separator from '@/components/separator'
-import Newsletter from '@/components/newsletter'
-import Hero from '@/components/hero/hero-support'
 import HeroDocs from '@/components/hero/hero-docs'
 
-export async function generateStaticParams() {
-  const content = getTermsAndConditionsContent();
+// export async function generateStaticParams() {
+//   const content = getTermsAndConditionsContent();
 
-  return content;
-}
+//   return content;
+// }
 
 export default async function Terms() {
   const content = getTermsAndConditionsContent();
