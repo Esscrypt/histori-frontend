@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { getBlogPosts } from '@/components/mdx/utils'
+import { getBlogPosts, getDocumentation } from '@/components/mdx/utils'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -11,21 +11,21 @@ import PostDate from '@/components/posts/post-date'
 export async function generateStaticParams() {
   const allBlogs = getBlogPosts();
 
-  return allBlogs.map((post) => ({
-    slug: post.slug,
+  return allBlogs.map((doc) => ({
+    slug: doc.slug,
   }))
 }
 
 export async function generateMetadata({ params }: {
   params: { slug: string }
 }): Promise<Metadata | undefined> {
-  const post = getBlogPosts().find((post) => post.slug === params.slug);
+  const doc = getDocumentation().find((doc) => doc.slug === params.slug);
 
-  if (!post) {
+  if (!doc) {
     return;
   }
 
-  const { title, summary: description } = post.metadata;
+  const { title, summary: description } = doc.metadata;
 
   return {
     title,
@@ -36,9 +36,9 @@ export async function generateMetadata({ params }: {
 export default async function SinglePost({ params }: {
   params: { slug: string }
 }) {
-  const post = getBlogPosts().find((post) => post.slug === params.slug);
+  const doc = getBlogPosts().find((doc) => doc.slug === params.slug);
 
-  if (!post) notFound();
+  if (!doc) notFound();
 
   return (
     <>
@@ -56,20 +56,20 @@ export default async function SinglePost({ params }: {
                   {/* Title and excerpt */}
                   <div className="text-center md:text-left">
                     <Link className="inline-flex font-semibold text-blue-600 hover:text-blue-500 transition duration-150 ease-in-out group mb-2" href="/blog" data-aos="fade-down"><span className="tracking-normal text-blue-600 group-hover:-translate-x-0.5 transition-transform duration-150 ease-in-out mr-1">&lt;-</span> Back to Blog</Link>
-                    <h1 className="h2 font-playfair-display text-slate-100 mb-6">{post.metadata.title}</h1>
+                    <h1 className="h2 font-playfair-display text-slate-100 mb-6">{doc.metadata.title}</h1>
                   </div>
                   {/* Article meta */}
                   <div className="md:flex md:items-center md:justify-between mt-3" data-aos="fade-up">
                     {/* Author meta */}
-                    {post.metadata.authorImg && (
+                    {doc.metadata.authorImg && (
                       <div className="flex items-center justify-center">
                         <a href="#0">
-                          <Image className="rounded-full shrink-0 mr-3" src={post.metadata.authorImg} width={32} height={32} alt={post.metadata.author || ''} />
+                          <Image className="rounded-full shrink-0 mr-3" src={doc.metadata.authorImg} width={32} height={32} alt={doc.metadata.author || ''} />
                         </a>
                         <div>
-                          <a className="font-medium text-slate-200 hover:text-slate-100 transition duration-150 ease-in-out" href="#0">{post.metadata.author}</a>
+                          <a className="font-medium text-slate-200 hover:text-slate-100 transition duration-150 ease-in-out" href="#0">{doc.metadata.author}</a>
                           <span className="text-slate-600"> · </span>
-                          <span className="text-slate-400"><PostDate dateString={post.metadata.publishedAt} /></span>
+                          <span className="text-slate-400"><PostDate dateString={doc.metadata.publishedAt} /></span>
                         </div>
                       </div>
                     )}
@@ -103,9 +103,9 @@ export default async function SinglePost({ params }: {
                 </div>
 
                 {/* Article image */}
-                {post.metadata.image &&
+                {doc.metadata.image &&
                   <figure>
-                    <Image className="w-full" src={post.metadata.image} width={768} height={432} priority alt={post.metadata.title} />
+                    <Image className="w-full" src={doc.metadata.image} width={768} height={432} priority alt={doc.metadata.title} />
                   </figure>
                 }
 
@@ -120,7 +120,7 @@ export default async function SinglePost({ params }: {
 
             <div className="mb-8">
               <article className="prose text-lg text-slate-500 max-w-none prose-lg prose-p:leading-normal prose-headings:font-playfair-display prose-headings:text-slate-900 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-a:font-medium prose-strong:font-medium prose-strong:text-slate-900 prose-blockquote:pl-4 prose-blockquote:border-l-2 prose-blockquote:border-slate-900 prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:text-inherit before:prose-p:content-[''] after:prose-p:content-[''] prose-hr:my-8">
-                <CustomMDX source={post.content} />
+                <CustomMDX source={doc.content} />
               </article>
             </div>
 

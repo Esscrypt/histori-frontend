@@ -1,5 +1,5 @@
 import VideoThumb from '@/public/images/wof-hero.jpg'
-import ModalVideo02 from '@/components/modal-video-02'
+import ModalVideo02 from '@/components/modals/modal-video-02'
 
 export default function HeroWol() {  
   return (

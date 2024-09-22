@@ -1,4 +1,4 @@
-import PricingTables from './pricing-tables';
+import PricingTables from '../pricing/pricing-tables';
 
 export default function HeroPricing() {  
   return (
@@ -12,7 +12,7 @@ export default function HeroPricing() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12">
-            <h1 className="h1 font-playfair-display text-slate-100">Find the right plan for your business</h1>
+            <h1 className="h1 font-playfair-display text-slate-100">Unlock top-tier blockchain data with zero commitments. Start now!</h1>
           </div>
 
           <PricingTables />
