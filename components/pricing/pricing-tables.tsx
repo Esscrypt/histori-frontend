@@ -34,7 +34,7 @@ export default function PricingTables() {
   
   return (
     <div>
-
+{/* TODO: Create a Quarterly option this should not be a toggle but a radio button option */}
       {/* Pricing toggle */}
       <div className="flex justify-center items-center space-x-4 sm:space-x-7 mb-16">
         <div className="text-sm text-slate-500 font-medium text-right min-w-[8rem]">Pay Monthly</div>
