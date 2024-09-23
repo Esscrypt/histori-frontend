@@ -14,11 +14,11 @@ export default function Pricing() {
   return (
     <>
       <Hero />
-      <CtaPricing />
+      {/* <CtaPricing /> */}
       <Features />
       <FeaturesTable />
       <Faqs />
-      <Cta />
+      {/* <Cta /> */}
     </>
   )
 }
