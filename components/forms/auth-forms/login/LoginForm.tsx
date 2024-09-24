@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import axiosInstance from '@/lib/axios/axiosInstance';
 import { useDebounce } from '@/lib/utils/useDebounce';
 import { EMAIL_VALIDATION } from '@/config';
-import { set } from 'date-fns';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -132,6 +131,25 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      {/* OAuth Buttons */}
+      <div className="mt-6 flex gap-4">
+        <button
+          className="btn-sm w-full text-sm text-white bg-red-600 hover:bg-red-700 group"
+          type="button"
+          onClick={() => handleOAuthLogin('google')}
+        >
+          Login with Google
+        </button>
+
+        <button
+          className="btn-sm w-full text-sm text-white bg-gray-600 hover:bg-gray-700 group"
+          type="button"
+          onClick={() => handleOAuthLogin('github')}
+        >
+          Login with GitHub
+        </button>
+      </div>
+
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium mb-1" htmlFor="email">
@@ -167,30 +185,23 @@ const LoginForm = () => {
       {/* Sign In Button */}
       <div className="mt-6">
         <button
-          className="btn-sm w-full text-sm text-white bg-blue-600 hover:bg-blue-700 group"
+          disabled={loading}
           type="submit"
-          disabled={!isChecked || loading} // Disable if not checked or loading
+          className="btn-sm w-full text-sm text-white bg-blue-600 hover:bg-blue-700 group flex justify-center items-center"
         >
-          {loading ? 'Signing In...' : 'Sign In'}
-        </button>
-      </div>
-
-      {/* OAuth Buttons */}
-      <div className="mt-6 flex gap-4">
-        <button
-          className="btn-sm w-full text-sm text-white bg-red-600 hover:bg-red-700 group"
-          type="button"
-          onClick={() => handleOAuthLogin('google')}
-        >
-          Login with Google
-        </button>
-
-        <button
-          className="btn-sm w-full text-sm text-white bg-gray-600 hover:bg-gray-700 group"
-          type="button"
-          onClick={() => handleOAuthLogin('github')}
-        >
-          Login with GitHub
+          {loading ? (
+            <>
+              <svg className="animate-spin h-5 w-5 mr-3 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+              </svg>
+              Logging In...
+            </>
+          ) : (
+            <>
+              Log In<span className="tracking-normal text-blue-300 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
+            </>
+          )}
         </button>
       </div>
 
