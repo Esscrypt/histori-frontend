@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import axiosInstance from '@/lib/axios/axiosInstance';
 import { useDebounce } from '@/lib/utils/useDebounce';
 import { EMAIL_VALIDATION } from '@/config';
+import { set } from 'date-fns';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -46,10 +47,15 @@ const LoginForm = () => {
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked); // Toggle checkbox state
+    setError(''); // Clear any error message
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if(!isChecked) {
+      setError('Please agree to the Terms and Conditions');
+      return;
+    }
     setLoading(true);
 
     try {
@@ -71,6 +77,10 @@ const LoginForm = () => {
   };
 
   const handleOAuthLogin = async (provider: string) => {
+    if(!isChecked) {
+      setError('Please agree to the Terms and Conditions');
+      return;
+    }
     setLoading(true);
     try {
       // Start the OAuth flow by asking the backend for the authorization URL
@@ -92,9 +102,9 @@ const LoginForm = () => {
   const exchangeOAuthCode = async (provider: string, code: string) => {
     try {
       const res = await axiosInstance.post(`/auth/${provider}/callback`, { code });
-      const { access_token } = res.data;
+      const { accessToken } = res.data;
       // Store the access token and navigate to the dashboard
-      localStorage.setItem('token', access_token);
+      localStorage.setItem('token', accessToken);
       router.push('/');
     } catch (error) {
       setOauthError('Failed to exchange OAuth code.');
@@ -106,7 +116,6 @@ const LoginForm = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
     const provider = urlParams.get('provider');
-    // const provider = window.location.pathname.includes('google') ? 'google' : 'github';
 
     if (code) {
       exchangeOAuthCode(provider!, code);
@@ -151,7 +160,7 @@ const LoginForm = () => {
           onChange={handleCheckboxChange}
         />
         <label htmlFor="agree" className="ml-2">
-          I agree to the <a href="/privacy-policy" className="text-blue-600 underline">Privacy Policy</a> and <a href="/terms" className="text-blue-600 underline">Terms and Conditions</a>.
+          I agree to the <a href="support/privacy-policy" className="text-blue-600 underline">Privacy Policy</a> and <a href="support/terms-conditions" className="text-blue-600 underline">Terms and Conditions</a>.
         </label>
       </div>
 

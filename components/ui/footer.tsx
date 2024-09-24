@@ -29,7 +29,7 @@ export default function Footer() {
                 <a href="/pricing" className="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out">Pricing</a>
               </li>
               <li>
-                <a href="/docs" className="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out">API Documentation</a>
+                <a href="https://docs.histori.xyz/" className="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out">API Documentation</a>
               </li>
               <li>
                 <a href="/support/contact" className="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out">Contact Us</a>
