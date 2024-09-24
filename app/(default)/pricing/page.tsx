@@ -18,7 +18,7 @@ export default function Pricing() {
       {/* <Features /> */}
       <FeaturesTable />
       <Faqs />
-      <Cta />
+      {/* <Cta /> */}
     </>
   )
 }

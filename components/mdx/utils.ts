@@ -57,3 +57,11 @@ export function getBlogPosts() {
 export function getDocumentation() {
   return getMDXData(path.join(process.cwd(), "content/docs"));
 }
+
+export function getTermsAndConditionsContent() {
+  return readMDXFile("content/terms-and-conditions.mdx").content;
+}
+
+export function getPrivacyPolicy() {
+  return readMDXFile("content/privacy-policy.mdx").content;
+}
