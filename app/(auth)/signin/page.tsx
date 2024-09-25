@@ -3,9 +3,7 @@ export const metadata = {
   description: 'Sign in to Histori',
 }
 
-import Image from 'next/image'
 import Logo from '@/components/ui/logo'
-import PageBG from '@/public/images/background.webp'
 import CustomerAvatar from '@/public/images/customer-avatar-05.jpg'
 import LoginForm from '@/components/forms/auth-forms/login/LoginForm'
 
@@ -52,7 +50,7 @@ export default function SignIn() {
 
         {/* Bg image */}
         <div className="absolute inset-0" data-aos="fade">
-          <Image className="opacity-10 w-full h-full object-cover" src={PageBG} width={760} height={900} priority alt="Background" />
+          <img className="opacity-10 w-full h-full object-cover" src="/images/background.webp" width={760} height={900} alt="Background" />
         </div> 
 
         {/* Motivational Quote */}
@@ -69,9 +67,6 @@ export default function SignIn() {
                 </blockquote>
               </div>
               <div className="flex items-center mt-4">
-                <a href="#0">
-                  <Image className="rounded-full shrink-0 mr-3" src={CustomerAvatar} width={32} height={32} alt="Customer Avatar" />
-                </a>
                 <div className="font-medium">
                   <span className="text-slate-200">Mihail Kirov</span>
                   <span className="text-slate-600"> · </span>

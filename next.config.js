@@ -8,6 +8,9 @@ const nextConfig = {
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   // Optionally, add any other Next.js config below
   reactStrictMode: true,
+  images: {
+    unoptimized: true,
+  },
 };
 
 module.exports = withMDX(nextConfig);

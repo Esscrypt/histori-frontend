@@ -4,8 +4,6 @@ export const metadata = {
 }
 
 import ResetPasswordForm from '@/components/forms/auth-forms/reset-password/ResetPasswordForm'
-import PageBg from '@/public/images/background.webp'
-import Image from 'next/image'
 
 export default function ResetPassword() {
   return (
@@ -40,7 +38,7 @@ export default function ResetPassword() {
 
         {/* Bg image */}
         <div className="absolute inset-0" data-aos="fade">
-          <Image className="opacity-10 w-full h-full object-cover" src={PageBg} width={760} height={900} priority alt="Background" />
+          <img className="opacity-10 w-full h-full object-cover" src="/images/background.webp" width={760} height={900} alt="Background" />
         </div>
 
         {/* Motivational Quote */}

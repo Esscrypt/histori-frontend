@@ -3,8 +3,6 @@ export const metadata = {
     description: 'Contact Form for Histori',
   }
   
-  import Image from 'next/image'
-  import PageBg from '@/public/images/background.webp'
   import ContactForm from '@/components/forms/auth-forms/contact-us/ContactForm'
   export default function Contact() {
     return (
@@ -39,7 +37,7 @@ export const metadata = {
   
           {/* Bg image */}
           <div className="absolute inset-0" data-aos="fade">
-            <Image className="opacity-10 w-full h-full object-cover" src={PageBg} width={760} height={900} priority alt="Background" />
+            <img className="opacity-10 w-full h-full object-cover" src="/images/background.webp" width={760} height={900} alt="Background" />
           </div>
 
         {/* Motivational Quote */}

@@ -1,6 +1,3 @@
-import Image from 'next/image'
-// import TargetImage from '@/public/images/target.png'
-import TargetImage from '@/public/images/values.webp'
 
 export default function Target() {
   return (
@@ -52,7 +49,7 @@ export default function Target() {
 
             {/* Image */}
             <div className="md:w-5/12 lg:w-1/2" data-aos="fade-left">
-              <Image className="mx-auto md:max-w-none" src={TargetImage} width={540} height={540} alt="Target" />
+              <img className="mx-auto md:max-w-none" src="/images/values.webp" width={540} height={540} alt="Target" />
             </div>
 
           </div>
