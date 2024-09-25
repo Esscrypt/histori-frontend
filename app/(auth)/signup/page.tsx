@@ -1,10 +1,9 @@
 export const metadata = {
-    title: 'Sign In - Histori',
+    title: 'Sign Up - Histori',
     description: 'Page description',
   }
 
 import Logo from '@/components/ui/logo'
-import CustomerAvatar from '@/public/images/customer-avatar-05.jpg'
 import RegisterForm from '@/components/forms/auth-forms/register/RegisterForm'
   
   export default function SignUp() {
@@ -23,7 +22,7 @@ import RegisterForm from '@/components/forms/auth-forms/register/RegisterForm'
                   <Logo />
                 </div>
   
-                <h1 className="h2 font-playfair-display text-slate-800 mb-12">Log in to Histori</h1>
+                <h1 className="h2 font-playfair-display text-slate-800 mb-12">Register in Histori</h1>
   
                 {/* Social login */}
                 {/* <SocialLogin /> */}
@@ -70,7 +69,7 @@ import RegisterForm from '@/components/forms/auth-forms/register/RegisterForm'
                     <Image className="rounded-full shrink-0 mr-3" src={CustomerAvatar} width={32} height={32} alt="Customer Avatar" />
                   </a> */}
                   <div className="font-medium">
-                    <span className="text-slate-200">Alex Johnson</span>
+                    <span className="text-slate-200">Mihail Kirov</span>
                     <span className="text-slate-600"> · </span>
                     <span className="text-slate-500">Founder, Histori</span>
                   </div>

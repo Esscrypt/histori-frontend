@@ -104,7 +104,7 @@ export default function PricingTables() {
             </li>
           </ul>
           <div className="p-3 rounded bg-slate-50">
-            <a className="btn-sm text-white bg-blue-600 hover:bg-blue-700 w-full group" href="#0">
+            <a className="btn-sm text-white bg-blue-600 hover:bg-blue-700 w-full group" href="/signin">
               Start free trial{' '}
               <span className="tracking-normal text-blue-300 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
                 -&gt;

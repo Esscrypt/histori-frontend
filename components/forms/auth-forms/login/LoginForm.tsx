@@ -63,7 +63,7 @@ const LoginForm = () => {
       if (res.status === 200) {
         document.cookie = `token=${data.token}; path=/; HttpOnly`;
         localStorage.setItem('token', data.token);
-        router.push('/');
+        router.push('/dashboard');
       } else {
         setError(data.message);
       }
@@ -110,12 +110,12 @@ const LoginForm = () => {
     }
   };
 
-  const exchangeOAuthCode = async (provider: string, code: string) => {
+  const exchangeOAuthCode = async (provider: string, code: string, referrer?: string) => {
     try {
-      const res = await axiosInstance.post(`/auth/${provider}/callback`, { code });
+      const res = await axiosInstance.post(`/auth/${provider}/callback`, { code, referrer });
       const { accessToken } = res.data;
       localStorage.setItem('token', accessToken);
-      router.push('/');
+      router.push('/dashboard');
     } catch (error) {
       setOauthError('Failed to exchange OAuth code.');
       console.error('OAuth code exchange error:', error);
@@ -126,9 +126,10 @@ const LoginForm = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
     const provider = urlParams.get('provider');
+    const referrer = urlParams.get('referrer') || undefined;
 
     if (code) {
-      exchangeOAuthCode(provider!, code);
+      exchangeOAuthCode(provider!, code, referrer);
     }
   }, []);
 

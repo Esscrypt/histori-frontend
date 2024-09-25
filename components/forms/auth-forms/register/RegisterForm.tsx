@@ -88,11 +88,15 @@ const Register = () => {
         alert(res.data.message);
         router.push('/signin');
       } else {
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const referrer = urlParams.get('referrer') || undefined;
         // Otherwise, it's a normal registration
         const res = await axiosInstance.post('/auth/register', {
           email,
           password,
           repeatPassword,
+          referrer
         });
         alert(res.data.message);
         router.push('/signin');
