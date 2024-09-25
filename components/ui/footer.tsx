@@ -32,7 +32,7 @@ export default function Footer() {
                 <a href="https://docs.histori.xyz/" className="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out">API Documentation</a>
               </li>
               <li>
-                <a href="/support/contact" className="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out">Contact Us</a>
+                <a href="/contact" className="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out">Contact Us</a>
               </li>
             </ul>
           </div>
@@ -41,9 +41,9 @@ export default function Footer() {
           <div className="sm:col-span-6 md:col-span-3 lg:col-span-2">
             <h6 className="text-sm text-slate-800 font-semibold mb-2">Company</h6>
             <ul className="text-sm font-medium space-y-2">
-              <li>
+              {/* <li>
                 <a href="/about" className="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out">About Us</a>
-              </li>
+              </li> */}
               <li>
                 <a href="/support/terms-conditions" className="text-slate-500 hover:text-blue-600 transition duration-150 ease-in-out">Terms of Use</a>
               </li>
