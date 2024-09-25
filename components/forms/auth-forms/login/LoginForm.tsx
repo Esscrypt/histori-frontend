@@ -55,11 +55,11 @@ const LoginForm = () => {
       return;
     }
     setLoading(true);
-
+  
     try {
       const res = await axiosInstance.post('/auth/login', { email, password });
       const data = res.data;
-
+  
       if (res.status === 200) {
         document.cookie = `token=${data.token}; path=/; HttpOnly`;
         localStorage.setItem('token', data.token);
@@ -67,13 +67,19 @@ const LoginForm = () => {
       } else {
         setError(data.message);
       }
-    } catch (err) {
-      setError('An unexpected error occurred');
+    } catch (err: any) {
+      if (err.response && err.response.status === 400) {
+        // Display the error message returned from the server
+        setError(err.response.data.message || 'Invalid credentials');
+      } else {
+        // Handle other errors (network issues, etc.)
+        setError('An unexpected error occurred. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
   };
-
+  
   const handleOAuthLogin = async (provider: string) => {
     if (!isChecked) {
       setError('Please agree to the Terms and Conditions');
@@ -83,17 +89,22 @@ const LoginForm = () => {
     try {
       const res = await axiosInstance.get(`/auth/${provider}-url`);
       const { url } = res.data;
-
+  
       if (url) {
         window.location.href = url;
       }
-    } catch (error) {
-      setError('OAuth login failed. Please try again.');
-      console.error('OAuth login error:', error);
+    } catch (err: any) {
+      if (err.response && err.response.status === 400) {
+        // Display the specific error message from the OAuth endpoint
+        setError(err.response.data.message || 'OAuth login failed. Please try again.');
+      } else {
+        setError('OAuth login failed. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
   };
+  
 
   const handleResendConfirmation = async () => {
     if (!email) {
