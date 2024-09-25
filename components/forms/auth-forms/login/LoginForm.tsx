@@ -61,8 +61,8 @@ const LoginForm = () => {
       const data = res.data;
   
       if (res.status === 200) {
-        document.cookie = `token=${data.token}; path=/; HttpOnly`;
-        localStorage.setItem('token', data.token);
+        document.cookie = `token=${data.accessToken}; path=/; HttpOnly`;
+        localStorage.setItem('token', data.accessToken);
         router.push('/dashboard');
       } else {
         setError(data.message);

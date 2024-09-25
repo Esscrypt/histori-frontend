@@ -31,7 +31,7 @@ const Register = () => {
         setError('Invalid email');
       }
     }, 500);
-    
+
     clearTimeout(timeoutId);
   };
 
@@ -88,7 +88,6 @@ const Register = () => {
         alert(res.data.message);
         router.push('/signin');
       } else {
-
         const urlParams = new URLSearchParams(window.location.search);
         const referrer = urlParams.get('referrer') || undefined;
         // Otherwise, it's a normal registration
@@ -96,13 +95,17 @@ const Register = () => {
           email,
           password,
           repeatPassword,
-          referrer
+          referrer,
         });
         alert(res.data.message);
         router.push('/signin');
       }
     } catch (error: any) {
-      setError('An error occurred. Please try again.');
+      if (error.response && error.response.status === 400) {
+        setError(error.response.data.message); // Show specific error message
+      } else {
+        setError('An error occurred. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
@@ -153,7 +156,7 @@ const Register = () => {
         </div>
         {error && <p className="text-sm font-bold text-rose-500">{error}</p>}
       </div>
-      
+
       <div className="mt-4">
         <input
           type="checkbox"
@@ -188,6 +191,13 @@ const Register = () => {
             </>
           )}
         </button>
+      </div>
+
+      {/* Add "Already have an account? Log in" link */}
+      <div className="mt-4 text-center">
+        <p>
+          Already have an account? <a href="/signin" className="text-blue-600 underline">Log in here</a>
+        </p>
       </div>
     </form>
   );

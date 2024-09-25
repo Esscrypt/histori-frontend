@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useState } from 'react';
 import axiosInstance from '@/lib/axios/axiosInstance'; // Adjust the path to your axios instance
@@ -30,8 +30,12 @@ const ResetPasswordForm = () => {
           router.push('/signin');
         }, 3000);
       }
-    } catch (err) {
-      setError('Failed to send password reset link. Please try again.');
+    } catch (err: any) {
+      if (err.response && err.response.data && err.response.data.message) {
+        setError(err.response.data.message);
+      } else {
+        setError('Failed to send password reset link. Please try again.');
+      }
     } finally {
       setLoading(false);
     }

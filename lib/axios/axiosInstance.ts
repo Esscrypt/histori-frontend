@@ -7,7 +7,6 @@ const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'Access-Control-Allow-Origin': '*', // Allow requests from any origin
   },
   withCredentials: true, // Send cookies with requests
 });
