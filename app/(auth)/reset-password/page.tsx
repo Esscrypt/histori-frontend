@@ -1,9 +1,8 @@
 export const metadata = {
-  title: 'Reset Password - Tidy',
-  description: 'Page description',
+  title: 'Reset Password - Histori',
+  description: 'Password Reset for Histori',
 }
 
-import Link from 'next/link'
 import Image from 'next/image'
 import PageBg from '@/public/images/reset-password-bg.jpg'
 import ResetPasswordForm from '@/components/forms/auth-forms/reset-password/ResetPasswordForm'

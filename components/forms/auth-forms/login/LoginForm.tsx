@@ -15,12 +15,12 @@ const LoginForm = () => {
   const [loading, setLoading] = useState(false);
   const [isChecked, setIsChecked] = useState(false); // Checkbox state for T&C
   const [oauthError, setOauthError] = useState('');
+  const [confirmationMessage, setConfirmationMessage] = useState('');
   const router = useRouter();
 
   const debouncedEmail = useDebounce(email, 500);
   const debouncedPassword = useDebounce(password, 500);
 
-  // Validation function for email
   const validateEmail = (email: string) => {
     if (!EMAIL_VALIDATION.test(email) && email.length > 0) {
       return 'Invalid email format';
@@ -28,7 +28,6 @@ const LoginForm = () => {
     return '';
   };
 
-  // Validation function for password
   const validatePassword = (password: string) => {
     if (password.length < 6 && password.length > 0) {
       return 'Password must be at least 6 characters';
@@ -51,7 +50,7 @@ const LoginForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if(!isChecked) {
+    if (!isChecked) {
       setError('Please agree to the Terms and Conditions');
       return;
     }
@@ -76,17 +75,15 @@ const LoginForm = () => {
   };
 
   const handleOAuthLogin = async (provider: string) => {
-    if(!isChecked) {
+    if (!isChecked) {
       setError('Please agree to the Terms and Conditions');
       return;
     }
     setLoading(true);
     try {
-      // Start the OAuth flow by asking the backend for the authorization URL
       const res = await axiosInstance.get(`/auth/${provider}-url`);
       const { url } = res.data;
 
-      // Once you get the authorization URL, navigate to it
       if (url) {
         window.location.href = url;
       }
@@ -98,11 +95,25 @@ const LoginForm = () => {
     }
   };
 
+  const handleResendConfirmation = async () => {
+    if (!email) {
+      setError('Please enter your email to resend confirmation.');
+      return;
+    }
+
+    try {
+      const res = await axiosInstance.post('/auth/resend-confirmation', { email });
+      setConfirmationMessage(res.data.message || 'Confirmation email has been resent.');
+    } catch (err) {
+      setError('Failed to resend confirmation email.');
+      console.error('Error resending confirmation email:', err);
+    }
+  };
+
   const exchangeOAuthCode = async (provider: string, code: string) => {
     try {
       const res = await axiosInstance.post(`/auth/${provider}/callback`, { code });
       const { accessToken } = res.data;
-      // Store the access token and navigate to the dashboard
       localStorage.setItem('token', accessToken);
       router.push('/');
     } catch (error) {
@@ -155,17 +166,47 @@ const LoginForm = () => {
           <label className="block text-sm font-medium mb-1" htmlFor="email">
             Email <span className="text-rose-500">*</span>
           </label>
-          <input onChange={handleEmailChange} id="email" className="form-input py-2 w-full" type="email" value={email} required />
+          <input
+            onChange={handleEmailChange}
+            id="email"
+            className="form-input py-2 w-full"
+            type="email"
+            value={email}
+            required
+          />
           {emailError && <p className="text-red-500 mt-2">{emailError}</p>}
         </div>
         <div>
           <label className="block text-sm font-medium mb-1" htmlFor="password">
             Password <span className="text-rose-500">*</span>
           </label>
-          <input id="password" className="form-input py-2 w-full" type="password" value={password} onChange={handlePasswordChange} required minLength={6} />
+          <input
+            id="password"
+            className="form-input py-2 w-full"
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+            required
+            minLength={6}
+          />
           {passwordError && <p className="text-red-500 mt-2">{passwordError}</p>}
         </div>
+        {/* Reset Password and Resend Email Confirmation Links */}
+        <div className="flex justify-between">
+          <a href="/reset-password" className="text-blue-600 underline">
+            Forgot your password?
+          </a>
+          <button
+            type="button"
+            className="text-blue-600 underline"
+            onClick={handleResendConfirmation}
+          >
+            Resend confirmation email
+          </button>
+        </div>
+        {confirmationMessage && <p className="text-green-500 mt-2">{confirmationMessage}</p>}
       </div>
+
       {error && <p className="text-red-500 mt-2">{error}</p>}
 
       {/* Terms and Conditions */}
@@ -178,7 +219,15 @@ const LoginForm = () => {
           onChange={handleCheckboxChange}
         />
         <label htmlFor="agree" className="ml-2">
-          I agree to the <a href="support/privacy-policy" className="text-blue-600 underline">Privacy Policy</a> and <a href="support/terms-conditions" className="text-blue-600 underline">Terms and Conditions</a>.
+          I agree to the{' '}
+          <a href="support/privacy-policy" className="text-blue-600 underline">
+            Privacy Policy
+          </a>{' '}
+          and{' '}
+          <a href="support/terms-conditions" className="text-blue-600 underline">
+            Terms and Conditions
+          </a>
+          .
         </label>
       </div>
 
@@ -191,25 +240,48 @@ const LoginForm = () => {
         >
           {loading ? (
             <>
-              <svg className="animate-spin h-5 w-5 mr-3 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+              <svg
+                className="animate-spin h-5 w-5 mr-3 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                ></path>
               </svg>
               Logging In...
             </>
           ) : (
             <>
-              Log In<span className="tracking-normal text-blue-300 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
+              Log In
+              <span className="tracking-normal text-blue-300 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
+                -&gt;
+              </span>
             </>
           )}
         </button>
       </div>
 
       {oauthError && <p className="text-red-500 mt-4">{oauthError}</p>}
+
       {/* Sign Up Link */}
       <div className="mt-4 text-center">
         <p>
-          Don't have an account? <a href="/signup" className="text-blue-600 underline">Sign up here</a>
+          Don't have an account?{' '}
+          <a href="/signup" className="text-blue-600 underline">
+            Sign up here
+          </a>
         </p>
       </div>
     </form>
