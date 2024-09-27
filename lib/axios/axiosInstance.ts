@@ -7,10 +7,11 @@ const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'Origin': window.location.origin, // Explicitly set the Origin header
+    ...(typeof window !== 'undefined' && { 'Origin': window.location.origin }), // Conditionally set the Origin header
   },
   withCredentials: true, // Send cookies with requests
 });
+
 
 // Optional: Set up interceptors for request/response handling
 axiosInstance.interceptors.request.use(
