@@ -65,7 +65,11 @@ const Dashboard = () => {
       if (err.response && err.response.status === 400) {
         setError(err.response.data.message);
       } else {
-        setError('An error occurred while fetching user profile.');
+        setTimeout(() => {
+          setError('An error occurred while fetching user profile.');
+          localStorage.removeItem('token');
+          router.push('/signin');
+        }, 3000);
       }
     } finally {
       setLoading(false);
