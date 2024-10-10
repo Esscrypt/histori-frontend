@@ -5,7 +5,7 @@ import axiosInstance from '@/lib/axios/axiosInstance';
 import { useRouter } from 'next/navigation';
 
 export default function PricingTables() {
-  const [annual, setAnnual] = useState<boolean>(true);
+  const [annual, setAnnual] = useState<boolean>(false);
   const router = useRouter(); // Using router for redirection
 
   // Function to create checkout session with token check
@@ -76,7 +76,7 @@ export default function PricingTables() {
             <div className="inline-flex items-baseline mb-3">
               <span className="h3 font-medium text-slate-500">$</span>
               <span className="h2 leading-7 font-playfair-display text-slate-800">{annual ? '0' : '0'}</span>
-              <span className="font-medium text-slate-400">/mo</span>
+              <span className="font-medium text-slate-400">{annual ? '/yr' : '/mo'}</span>
             </div>
             <div className="text-slate-500">
               Ideal for Testing and small-scale experimentation with limited data needs.
@@ -120,7 +120,7 @@ export default function PricingTables() {
             <div className="inline-flex items-baseline mb-3">
               <span className="h3 font-medium text-slate-500">$</span>
               <span className="h2 leading-7 font-playfair-display text-slate-800">{annual ? '45' : '50'}</span>
-              <span className="font-medium text-slate-400">/mo</span>
+              <span className="font-medium text-slate-400">{annual ? '/yr' : '/mo'}</span>
             </div>
             <div className="text-slate-500">Better insights for startups or small applications requiring moderate API usage.</div>
           </div>
@@ -168,7 +168,7 @@ export default function PricingTables() {
             <div className="inline-flex items-baseline mb-3">
               <span className="h3 font-medium text-slate-500">$</span>
               <span className="h2 leading-7 font-playfair-display text-slate-800">{annual ? '180' : '200'}</span>
-              <span className="font-medium text-slate-400">/mo</span>
+              <span className="font-medium text-slate-400">{annual ? '/yr' : '/mo'}</span>
             </div>
             <div className="text-slate-500">For growing businesses with higher API demands and steady growth.</div>
           </div>
@@ -213,7 +213,7 @@ export default function PricingTables() {
             <div className="inline-flex items-baseline mb-3">
               <span className="h3 font-medium text-slate-500">$</span>
               <span className="h2 leading-7 font-playfair-display text-slate-800">{annual ? '360' : '400'}</span>
-              <span className="font-medium text-slate-400">/mo</span>
+              <span className="font-medium text-slate-400">{annual ? '/yr' : '/mo'}</span>
             </div>
             <div className="text-slate-500">
               Better insights for Larger businesses or enterprises requiring extensive data access.
@@ -257,11 +257,11 @@ export default function PricingTables() {
          <div className="relative flex flex-col h-full px-6 py-5 bg-white shadow-lg" data-aos="fade-up" data-aos-delay="300">
           <div className="mb-4 pb-4 border-b border-slate-200">
             <div className="text-lg font-semibold text-slate-800 mb-1">
-              Enterprise
+              Custom
             </div>
             <div className="inline-flex items-baseline mb-3">
               <span className="h2 leading-7 font-playfair-display text-slate-800">
-                Custom
+                Enterprise
               </span>
             </div>
             <div className="text-slate-500">

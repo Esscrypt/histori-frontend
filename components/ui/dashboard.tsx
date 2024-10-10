@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '@/lib/axios/axiosInstance';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { EMAIL_VALIDATION } from '@/config';
@@ -16,13 +16,17 @@ const Dashboard = () => {
     requestLimit: 0,
     referralCode: '',
     referralPoints: 0,
+    firstName: '',     // Add firstName to user state
+    lastName: '',      // Add lastName to user state
+    username: '',      // Add username to user state
+    serverProvisioned: false, // Add serverProvisioning to user state
   });
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [apiKeyVisible, setApiKeyVisible] = useState(false);
   const [copySuccess, setCopySuccess] = useState('');
   const [emailSuccess, setEmailSuccess] = useState('');
-  const [subscriptionTier, setSubscriptionTier] = useState(user.tier);
   const [deleteSuccess, setDeleteSuccess] = useState('');
   const [emailToUpdate, setEmailToUpdate] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -56,8 +60,27 @@ const Dashboard = () => {
       });
 
       if (res.status === 200) {
-        setUser(res.data);
-        setSubscriptionTier(res.data.tier);
+        const newUser = res.data;
+
+        setUser((prevUser) => {
+          // Check if there are changes in the user data
+          const hasChanges = 
+            prevUser.email !== newUser.email ||
+            prevUser.apiKey !== newUser.apiKey ||
+            prevUser.tier !== newUser.tier ||
+            prevUser.requestCount !== newUser.requestCount ||
+            prevUser.requestLimit !== newUser.requestLimit ||
+            prevUser.referralCode !== newUser.referralCode ||
+            prevUser.referralPoints !== newUser.referralPoints ||
+            prevUser.firstName !== newUser.firstName ||
+            prevUser.lastName !== newUser.lastName ||
+            prevUser.username !== newUser.username ||
+            prevUser.serverProvisioned !== newUser.serverProvisioned;
+  
+            // Only return newUser if changes are detected, otherwise keep the old state
+            return hasChanges ? newUser : prevUser;
+        });
+
       } else {
         setError('Failed to load user data.');
       }
@@ -93,7 +116,7 @@ const Dashboard = () => {
 
   // Upgrade subscription to the next tier
   const handleUpgradeSubscription = async () => {
-    const currentTierIndex = subscriptionTiers.indexOf(subscriptionTier);
+    const currentTierIndex = subscriptionTiers.indexOf(user.tier);
 
     if (currentTierIndex === subscriptionTiers.length - 1) {
       setUpgradeMessage('You are already on the highest subscription tier (Enterprise).');
@@ -267,6 +290,14 @@ const Dashboard = () => {
     router.push('/signin');
   };
 
+  // Polling the user profile every 10 seconds to check for serverIp provisioning
+  // useEffect(() => {
+  //   const intervalId = setInterval(fetchUserProfile, 10000); // Poll every 10 seconds
+
+  //   return () => clearInterval(intervalId); // Clear interval on unmount
+  // }, []);
+
+
   useEffect(() => {
     fetchUserProfile();
 
@@ -297,8 +328,34 @@ const Dashboard = () => {
   return (
     <div className="space-y-6 p-6 bg-white rounded shadow-md max-w-4xl mx-auto mt-10">
       <h1 className="text-2xl font-bold mb-4 text-center">User Dashboard</h1>
+      
+      {user.tier !== 'Free' && user.serverProvisioned &&  (
+      <div className="flex items-center space-x-4 mb-6">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-4 border-b-4 border-blue-500"></div>
+        <p>Provisioning your server... Please wait.</p>
+      </div>
+    )}
+
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {/* Username */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Username:</label>
+          <div className="form-input py-2 w-full">{user.username || 'N/A'}</div>
+        </div>
+
+        {/* First Name */}
+        <div>
+          <label className="block text-sm font-medium mb-1">First Name:</label>
+          <div className="form-input py-2 w-full">{user.firstName || 'N/A'}</div>
+        </div>
+
+        {/* Last Name */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Last Name:</label>
+          <div className="form-input py-2 w-full">{user.lastName || 'N/A'}</div>
+        </div>
+
         <div>
           <label className="block text-sm font-medium mb-1">Email:</label>
           <div className="flex">
@@ -347,7 +404,7 @@ const Dashboard = () => {
 
         <div>
           <label className="block text-sm font-medium mb-1">Subscription Tier:</label>
-          <div className="form-input py-2 w-full">{subscriptionTier}</div>
+          <div className="form-input py-2 w-full">{user.tier}</div>
           <button
             className="mt-2 btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 w-full"
             onClick={handleUpgradeSubscription}
