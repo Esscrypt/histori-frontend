@@ -1,5 +1,7 @@
 const withMDX = require("@next/mdx")();
 
+console.log("NODE_ENV is:", process.env.NODE_ENV);
+
 const isProduction = process.env.NODE_ENV === "production";
 
 /** @type {import('next').NextConfig} */
