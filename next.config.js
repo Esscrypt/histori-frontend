@@ -1,8 +1,10 @@
 const withMDX = require("@next/mdx")();
 
+const isProduction = process.env.NODE_ENV === "production";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  output: isProduction && "export" || "standalone", // Use `export` in production and `public` in development
   // basePath: '/', // Optional, but required if you're deploying to a non-root path.
   // Configure `pageExtensions` to include MDX files
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
@@ -12,5 +14,6 @@ const nextConfig = {
     unoptimized: true,
   },
 };
+
 
 module.exports = withMDX(nextConfig);

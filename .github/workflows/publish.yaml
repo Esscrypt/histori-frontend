@@ -27,6 +27,7 @@ jobs:
       - name: Create .env file with secrets 🔐
         run: |
           echo NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }} >> .env
+          echo NODE_ENV=production >> .env
           echo NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }} >> .env
 
       - name: Setup Pages ⚙️
