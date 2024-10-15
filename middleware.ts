@@ -10,7 +10,7 @@ export function middleware(req: NextRequest) {
   
   // Check if the route is protected
   if (protectedRoutes.includes(pathname)) {
-    const token = req.cookies.get('token'); // Example: Use cookies for auth tokens
+    const token = localStorage.getItem('token'); // Example: Use cookies for auth tokens
 
     if (!token) {
       // Redirect to login page if not authenticated
