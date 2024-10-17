@@ -68,8 +68,8 @@ export default function Target() {
                 <div className="text-slate-500">Transactions Processed</div>
               </li>
               <li>
-                <div className="h2 font-playfair-display text-yellow-400">1,500+</div>
-                <div className="text-slate-500">Active Users</div>
+                <div className="h2 font-playfair-display text-yellow-400">420K+</div>
+                <div className="text-slate-500">Scraped Tokens</div>
               </li>
             </ul>
           </div>
