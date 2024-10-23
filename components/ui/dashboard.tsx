@@ -10,7 +10,7 @@ import { EMAIL_VALIDATION } from '@/config';
 const Dashboard = () => {
   const [user, setUser] = useState({
     email: '',
-    apiKey: '',
+    apiKeyValue: '',
     tier: '',
     requestCount: 0,
     requestLimit: 0,
@@ -19,7 +19,6 @@ const Dashboard = () => {
     firstName: '',     // Add firstName to user state
     lastName: '',      // Add lastName to user state
     username: '',      // Add username to user state
-    serverProvisioned: false, // Add serverProvisioning to user state
   });
 
   const [loading, setLoading] = useState(true);
@@ -61,12 +60,12 @@ const Dashboard = () => {
 
       if (res.status === 200) {
         const newUser = res.data;
-
+        console.log(newUser);
         setUser((prevUser) => {
           // Check if there are changes in the user data
           const hasChanges = 
             prevUser.email !== newUser.email ||
-            prevUser.apiKey !== newUser.apiKey ||
+            prevUser.apiKeyValue !== newUser.apiKeyValue ||
             prevUser.tier !== newUser.tier ||
             prevUser.requestCount !== newUser.requestCount ||
             prevUser.requestLimit !== newUser.requestLimit ||
@@ -74,8 +73,7 @@ const Dashboard = () => {
             prevUser.referralPoints !== newUser.referralPoints ||
             prevUser.firstName !== newUser.firstName ||
             prevUser.lastName !== newUser.lastName ||
-            prevUser.username !== newUser.username ||
-            prevUser.serverProvisioned !== newUser.serverProvisioned;
+            prevUser.username !== newUser.username;
   
             // Only return newUser if changes are detected, otherwise keep the old state
             return hasChanges ? newUser : prevUser;
@@ -101,7 +99,7 @@ const Dashboard = () => {
 
   // Copy API key to clipboard
   const handleCopyApiKey = () => {
-    navigator.clipboard.writeText(user.apiKey).then(
+    navigator.clipboard.writeText(user.apiKeyValue).then(
       () => setCopySuccess('API key copied!'),
       () => setCopySuccess('Failed to copy API key')
     );
@@ -328,13 +326,6 @@ const Dashboard = () => {
   return (
     <div className="space-y-6 p-6 bg-white rounded shadow-md max-w-4xl mx-auto mt-10">
       <h1 className="text-2xl font-bold mb-4 text-center">User Dashboard</h1>
-      
-      {user.tier !== 'Free' && user.serverProvisioned &&  (
-      <div className="flex items-center space-x-4 mb-6">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-4 border-b-4 border-blue-500"></div>
-        <p>Provisioning your server... Please wait.</p>
-      </div>
-    )}
 
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -384,7 +375,7 @@ const Dashboard = () => {
 
         <div>
           <label className="block text-sm font-medium mb-1">API Key:</label>
-          <div className="form-input py-2 w-full truncate">{apiKeyVisible ? user.apiKey : '••••••••••••••••'}</div>
+          <div className="form-input py-2 w-full truncate">{apiKeyVisible ? user.apiKeyValue : '••••••••••••••••'}</div>
           <div className="flex space-x-2 mt-1">
             <button
               className="btn-sm text-sm text-blue-600 hover:underline"

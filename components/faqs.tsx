@@ -21,10 +21,10 @@ export default function Faqs() {
               To get started, create an account, choose a subscription plan that suits your needs, and use your API key to access historical blockchain data. We also offer a free tier for basic usage.
             </Accordion>
             <Accordion title="What blockchains do you support?">
-              Currently, Histori supports Ethereum and other EVM-compatible chains, but we are continuously expanding support to other blockchains based on demand.
+              Currently, Histori supports only Ethereum, but we are continuously expanding support to other blockchains based on demand.
             </Accordion>
             <Accordion title="Can I upgrade or downgrade at any time?" active>
-              Yes, you can easily upgrade or downgrade your subscription at any time. Your new plan will take effect immediately, and any changes will be reflected in your account.
+              Yes, you can easily upgrade or downgrade your subscription at any time. Your upgrade will take effect immediately, and any changes will be reflected in your account.
             </Accordion>
             <Accordion title="Do you offer custom plans for enterprises?">
               Yes, we offer custom plans for businesses with high data requirements. Contact us for more information about tailored solutions and pricing.
@@ -35,9 +35,9 @@ export default function Faqs() {
             <Accordion title="How does Histori handle API rate limits?">
               API rate limits are based on your subscription tier. Each plan offers different request limits per month, and if you exceed your limit, you can upgrade your plan or wait for the next billing cycle.
             </Accordion>
-            <Accordion title="Can I request a refund?">
+            {/* <Accordion title="Can I request a refund?">
               We offer refunds in case of billing issues or accidental charges. Please review our refund policy or contact support if you have concerns.
-            </Accordion>
+            </Accordion> */}
             <span className="block border-t border-gray-200" aria-hidden="true"></span>
           </ul>
 
