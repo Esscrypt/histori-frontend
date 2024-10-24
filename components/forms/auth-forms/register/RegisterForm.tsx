@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import { EMAIL_VALIDATION } from '@/config';
+import { EMAIL_VALIDATION, PW_VALIDATION } from '@/config';
 import axiosInstance from '@/lib/axios/axiosInstance';
-import { useRouter } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 const Register = () => {
@@ -16,33 +16,28 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const [showRepeatPassword, setShowRepeatPassword] = useState(false); // State to toggle repeat password visibility
+  const searchParams = useSearchParams(); // Get the query parameters from the URL
   const router = useRouter();
 
   // Handle email change and debounce validation
-  const handleEmailChange = (e: { target: { value: any; }; }) => {
+  const handleEmailChange = (e: { target: { value: any } }) => {
     const value = e.target.value;
     setEmail(value);
 
-    let timeoutId;
-    timeoutId = setTimeout(() => {
-      if (EMAIL_VALIDATION.test(email)) {
-        setIsValidEmail(true);
-        setError('');
-      } else {
-        setIsValidEmail(false);
-        setError('Invalid email');
-      }
-    }, 500);
-
-    clearTimeout(timeoutId);
+    setError(EMAIL_VALIDATION.test(value) ? '' : 'Invalid email format');
+    setIsValidEmail(EMAIL_VALIDATION.test(value));
   };
 
-  const handlePasswordChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-    setPassword(e.target.value);
+  const handlePasswordChange = (e: { target: { value: any } }) => {
+    const value = e.target.value;
+    setPassword(value);
+    setError(PW_VALIDATION.test(value) ? '' : 'Password must be at least 10 alphanumeric characters long');
   };
 
-  const handleRepeatPasswordChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-    setRepeatPassword(e.target.value);
+  const handleRepeatPasswordChange = (e: { target: { value: any } }) => {
+    const value = e.target.value;
+    setRepeatPassword(value);
+    setError(PW_VALIDATION.test(value) ? '' : 'Password must be at least 10 alphanumeric characters long');
   };
 
   const comparePasswords = () => {
@@ -77,10 +72,15 @@ const Register = () => {
     if (tokenFromUrl) {
       setToken(tokenFromUrl);
     }
+
+    const referrerFromUrl = urlParams.get('referrer');
+    if (referrerFromUrl) {
+      localStorage.setItem('referrer', referrerFromUrl); // Save the referrer to local storage if present in URL
+    }
   }, []);
 
   // Handle form submission
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (!isChecked) {
       setError('Please agree to the Terms and Conditions');
@@ -89,6 +89,8 @@ const Register = () => {
 
     setLoading(true);
     try {
+      const referrer = localStorage.getItem('referrer'); // Get the referrer from local storage if available
+
       if (token) {
         const res = await axiosInstance.post('/auth/reset-password', {
           token,
@@ -97,13 +99,11 @@ const Register = () => {
         alert(res.data.message);
         router.push('/signin');
       } else {
-        const urlParams = new URLSearchParams(window.location.search);
-        const referrer = urlParams.get('referrer') || undefined;
         const res = await axiosInstance.post('/auth/register', {
           email,
           password,
           repeatPassword,
-          referrer,
+          referrer, // Include referrer in the registration request
         });
         alert(res.data.message);
         router.push('/signin');
@@ -118,6 +118,8 @@ const Register = () => {
       setLoading(false);
     }
   };
+
+  const loginUrl = searchParams ? `/signin?${searchParams.toString()}` : '/signin';
 
   return (
     <form onSubmit={handleSubmit}>
@@ -224,7 +226,7 @@ const Register = () => {
       {/* "Already have an account? Log in" link */}
       <div className="mt-4 text-center">
         <p>
-          Already have an account? <a href="/signin" className="text-blue-600 underline">Log in here</a>
+          Already have an account? <a href={loginUrl} className="text-blue-600 underline">Log in here</a>
         </p>
       </div>
     </form>

@@ -1,11 +1,11 @@
-'use client'
+'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import axiosInstance from '@/lib/axios/axiosInstance';
 import { useDebounce } from '@/lib/utils/useDebounce';
 import { EMAIL_VALIDATION } from '@/config';
-import { ethers } from 'ethers'; // Import ethers for Web3 interaction
+import { ethers } from 'ethers';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -18,9 +18,10 @@ const LoginForm = () => {
   const [oauthError, setOauthError] = useState('');
   const [confirmationMessage, setConfirmationMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [isWeb3Loading, setIsWeb3Loading] = useState(false); // State for Web3 login
+  const [isWeb3Loading, setIsWeb3Loading] = useState(false);
 
   const router = useRouter();
+  const searchParams = useSearchParams(); // Get query parameters
   const debouncedEmail = useDebounce(email, 500);
   const debouncedPassword = useDebounce(password, 500);
 
@@ -60,9 +61,15 @@ const LoginForm = () => {
     setLoading(true);
 
     try {
-      const res = await axiosInstance.post('/auth/login', { email, password });
-      const data = res.data;
+      const referrer = localStorage.getItem('referrer'); // Get referrer from local storage if exists
 
+      const res = await axiosInstance.post('/auth/login', {
+        email,
+        password,
+        referrer, // Include referrer in the request
+      });
+
+      const data = res.data;
       if (res.status === 200) {
         document.cookie = `token=${data.accessToken}; path=/; HttpOnly`;
         localStorage.setItem('token', data.accessToken);
@@ -93,30 +100,25 @@ const LoginForm = () => {
 
     try {
       setIsWeb3Loading(true);
-      // Prompt the user to connect their wallet
       if (!window.ethereum) {
         setError('Please install MetaMask or another Web3 wallet');
         return;
       }
 
-
-      const urlParams = new URLSearchParams(window.location.search);
-      const referrer = urlParams.get('referrer') || undefined;
-
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       const address = await signer.getAddress();
 
-      // Generate a message for the user to sign
       const message = `Sign this message to log in: ${new Date().toISOString()}`;
       const signature = await signer.signMessage(message);
 
-      // Send the wallet address and signature to the backend for verification
+      const referrer = localStorage.getItem('referrer'); // Get referrer from local storage if exists
+
       const res = await axiosInstance.post('/auth/web3-login', {
         walletAddress: address,
         message,
         signature,
-        referrer
+        referrer, // Send the referrer in the request if available
       });
 
       const data = res.data;
@@ -173,28 +175,38 @@ const LoginForm = () => {
     }
   };
 
-  const exchangeOAuthCode = async (provider: string, code: string, referrer?: string) => {
+  // Handle storing referrer in local storage
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const referrerFromUrl = urlParams.get('referrer');
+
+    if (referrerFromUrl) {
+      localStorage.setItem('referrer', referrerFromUrl); // Store referrer in local storage
+    }
+
+    // OAuth2 flow: check for the code and exchange it for an access token
+    const code = urlParams.get('code');
+    const provider = urlParams.get('provider');
+
+    if (code && provider) {
+      exchangeOAuthCode(provider, code);
+    }
+  }, []);
+
+  // OAuth2 flow: Exchange code for access token
+  const exchangeOAuthCode = async (provider: string, code: string) => {
     try {
+      const referrer = localStorage.getItem('referrer'); // Get referrer from local storage if exists
+
       const res = await axiosInstance.post(`/auth/${provider}/callback`, { code, referrer });
       const { accessToken } = res.data;
       localStorage.setItem('token', accessToken);
       router.push('/dashboard');
-    } catch (error) {
-      setOauthError('Failed to exchange OAuth code.');
-      console.error('OAuth code exchange error:', error);
+    } catch (err: any) {
+      setOauthError('Failed to exchange OAuth code. Please try again.');
+      console.error('OAuth code exchange error:', err);
     }
   };
-
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    const provider = urlParams.get('provider');
-    const referrer = urlParams.get('referrer') || undefined;
-
-    if (code) {
-      exchangeOAuthCode(provider!, code, referrer);
-    }
-  }, []);
 
   useEffect(() => {
     setEmailError(validateEmail(debouncedEmail));
@@ -278,9 +290,6 @@ const LoginForm = () => {
           {passwordError && <p className="text-red-500 mt-2">{passwordError}</p>}
         </div>
 
-        {/* Other Components */}
-        {/* (Include existing reset password, resend confirmation, error handling, etc.) */}
-
         {/* Terms and Conditions */}
         <div className="mt-4">
           <input
@@ -298,12 +307,11 @@ const LoginForm = () => {
             and{' '}
             <a href="support/terms-conditions" className="text-blue-600 underline">
               Terms and Conditions
-            </a>
-            .
+            </a>.
           </label>
         </div>
 
-        {/* Sign In Button */}
+        {/* Log In Button */}
         <div className="mt-6">
           <button
             disabled={loading}
@@ -342,6 +350,7 @@ const LoginForm = () => {
       </div>
 
       {error && <p className="text-red-500 mt-2">{error}</p>}
+      {confirmationMessage && <p className="text-green-500 mt-2">{confirmationMessage}</p>}
 
       {/* Sign Up Link */}
       <div className="mt-4 text-center">
@@ -350,6 +359,19 @@ const LoginForm = () => {
           <a href="/signup" className="text-blue-600 underline">
             Sign up here
           </a>
+        </p>
+      </div>
+
+      {/* Resend Confirmation Link */}
+      <div className="mt-4 text-center">
+        <p>
+          Didn't receive confirmation?{' '}
+          <button
+            onClick={handleResendConfirmation}
+            className="text-blue-600 underline"
+          >
+            Resend confirmation email
+          </button>
         </p>
       </div>
     </form>

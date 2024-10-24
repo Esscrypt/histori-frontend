@@ -22,11 +22,11 @@ const Dashboard = () => {
   const [error, setError] = useState('');
   const [apiKeyVisible, setApiKeyVisible] = useState(false);
   const [copySuccess, setCopySuccess] = useState('');
+  const [apiKeyCopySuccess, setApiKeyCopySuccess] = useState('');
   const [emailSuccess, setEmailSuccess] = useState('');
   const [deleteSuccess, setDeleteSuccess] = useState('');
   const [emailToUpdate, setEmailToUpdate] = useState('');
   const [emailError, setEmailError] = useState('');
-  const [upgradeMessage, setUpgradeMessage] = useState('');
   const router = useRouter();
 
   // Fetch user profile
@@ -85,8 +85,8 @@ const Dashboard = () => {
   // Copy API key to clipboard
   const handleCopyApiKey = () => {
     navigator.clipboard.writeText(user.apiKeyValue).then(
-      () => setCopySuccess('API key copied!'),
-      () => setCopySuccess('Failed to copy API key')
+      () => setApiKeyCopySuccess('API key copied!'),
+      () => setApiKeyCopySuccess('Failed to copy API key')
     );
   };
 
@@ -100,7 +100,7 @@ const Dashboard = () => {
   // Update email
   const handleUpdateEmail = async () => {
     if (emailError) {
-      setError('Please enter a valid email before updating.');
+      setEmailError('Please enter a valid email before updating.');
       return;
     }
 
@@ -231,13 +231,6 @@ const Dashboard = () => {
     router.push('/signin');
   };
 
-  // Polling the user profile every 10 seconds to check for serverIp provisioning
-  // useEffect(() => {
-  //   const intervalId = setInterval(fetchUserProfile, 10000); // Poll every 10 seconds
-
-  //   return () => clearInterval(intervalId); // Clear interval on unmount
-  // }, []);
-
 
   useEffect(() => {
     fetchUserProfile();
@@ -265,129 +258,191 @@ const Dashboard = () => {
 
   // Calculate percentage for the circular progress bar
   const usagePercentage = (user.requestCount / user.requestLimit) * 100;
-
   return (
-    <div className="space-y-6 p-6 bg-white rounded shadow-md max-w-4xl mx-auto mt-10">
-      <h1 className="text-2xl font-bold mb-4 text-center">User Dashboard</h1>
-
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Email:</label>
+    <div className="space-y-8 p-8 bg-white rounded-lg shadow-md max-w-4xl mx-auto mt-10">
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">User Dashboard</h1>
+  
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        {/* Email Section */}
+        <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+          <label className="block text-sm font-semibold mb-2 text-gray-700">Email:</label>
           <div className="flex">
-          <input
+            <input
               type="email"
-              className="form-input py-2 w-full"
+              className="form-input py-2 w-full border border-gray-300 rounded-md"
               value={emailToUpdate || user.email}
               onChange={handleEmailChange}
+              disabled={!!user.email}  // Disable input if email exists
             />
-            <button
-              className="ml-2 btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700"
-              onClick={handleUpdateEmail}
-              disabled={!!emailError}
-            >
-              Update
-            </button>
+            {!user.email && (
+              <button
+                className="ml-3 px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                onClick={handleUpdateEmail}
+                disabled={emailToUpdate.length === 0}
+              >
+                Set
+              </button>
+            )}
           </div>
-          {emailError && <p className="text-red-500 mt-1">{emailError}</p>}
-          {emailSuccess && <p className="text-green-500 mt-1">{emailSuccess}</p>}
+          {emailError && <p className="text-red-500 mt-2">{emailError}</p>}
+          {emailSuccess && <p className="text-green-500 mt-2">{emailSuccess}</p>}
         </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Referral Points:</label>
-          <div className="form-input py-2 w-full">{user.referralPoints}</div>
+  
+        {/* Referral Points Section */}
+        <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+          <label className="block text-sm font-semibold mb-2 text-gray-700">Referral Points:</label>
+          <div className="py-2 px-4 bg-white border border-gray-300 rounded-md text-gray-800">{user.referralPoints}</div>
         </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">API Key:</label>
-          <div className="form-input py-2 w-full truncate">{apiKeyVisible ? user.apiKeyValue : '••••••••••••••••'}</div>
-          <div className="flex space-x-2 mt-1">
+  
+        {/* API Key Section */}
+        <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+          <label className="block text-sm font-semibold mb-2 text-gray-700">API Key:</label>
+          <div className="py-2 px-4 bg-white border border-gray-300 rounded-md text-gray-800 truncate">
+            {apiKeyVisible ? user.apiKeyValue : '••••••••••••••••'}
+          </div>
+          <div className="flex space-x-3 mt-2">
             <button
-              className="btn-sm text-sm text-blue-600 hover:underline"
+              className="text-sm text-blue-600 hover:underline"
               onClick={() => setApiKeyVisible(!apiKeyVisible)}
             >
               {apiKeyVisible ? 'Hide' : 'Show'}
             </button>
             <button
-              className="btn-sm text-sm text-blue-600 hover:underline"
+              className="text-sm text-blue-600 hover:underline"
               onClick={handleCopyApiKey}
             >
               Copy
             </button>
           </div>
-          {copySuccess && <p className="text-green-500 mt-1">{copySuccess}</p>}
+          {apiKeyCopySuccess && <p className="text-green-500 mt-2">{apiKeyCopySuccess}</p>}
         </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Subscription Tier:</label>
-          <div className="form-input py-2 w-full">{user.tier}</div>
+  
+        {/* Subscription Tier Section */}
+        <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+          <label className="block text-sm font-semibold mb-2 text-gray-700">Subscription Tier:</label>
+          <div className="py-2 px-4 bg-white border border-gray-300 rounded-md text-gray-800">{user.tier}</div>
         </div>
       </div>
-
-      {/* Circular Progress Bar for Request Usage */}
-      <div className="w-40 mx-auto my-6">
-        <CircularProgressbar
-          value={usagePercentage}
-          text={`${user.requestCount}/${user.requestLimit}`}
-          styles={buildStyles({
-            textSize: '16px',
-            pathColor: usagePercentage > 80 ? 'red' : 'green',
-            textColor: '#000',
-          })}
-        />
-        <div className="text-center mt-2">Request Usage</div>
-      </div>
-
-      {/* Referral System */}
-      <div className="mt-6">
-        <h2 className="text-lg font-bold mb-2">Referral Program</h2>
-        <p>Share your referral code and earn rewards:</p>
-        <div className="form-input py-2 w-full">{user.referralCode}</div>
+  
+      {/* Conditionally display usage only if the tier is not 'None' */}
+      {user.tier !== 'None' && (
+        <div className="w-40 mx-auto my-8">
+          <CircularProgressbar
+            value={usagePercentage}
+            text={`${user.requestCount}/${user.requestLimit}`}
+            styles={buildStyles({
+              textSize: '18px',
+              pathColor: usagePercentage > 80 ? 'red' : 'green',
+              textColor: '#333',
+            })}
+          />
+          <div className="text-center mt-4 font-medium text-gray-600">Request Usage</div>
+        </div>
+      )}
+  
+    {/* Conditionally display subscription button */}
+    <div className="mt-8">
+      {user.tier === 'Free' ? (
         <button
-          className="btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 mt-2"
-          onClick={() =>
-            navigator.clipboard.writeText(
-              `${window.location.origin}/signup?referrer=${user.referralCode}`
-            )
-          }
+          className="btn-lg text-lg font-bold text-white bg-green-600 hover:bg-green-700 w-full py-3 rounded-lg shadow-lg"
+          onClick={async () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+              setError('No token found, please login.');
+              router.push('/signin');
+              return;
+            }
+
+            try {
+              const res = await axiosInstance.post(
+                '/payments/create-checkout-session',
+                { lookup_key: 'starter' },  // Assuming 'starter_plan' is the lookup key for Starter plan
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              );
+
+              if (res.status === 201 && res.data.url) {
+                window.location.href = res.data.url; // Redirect to Stripe checkout session
+              } else {
+                setError('Failed to create checkout session.');
+              }
+            } catch (err: any) {
+              if (err.response && err.response.status === 400) {
+                setError(err.response.data.message);
+              } else {
+                setError('An error occurred while creating the checkout session.');
+              }
+            }
+          }}
         >
-          Copy Referral Link
+          Subscribe to Starter Plan
         </button>
-      </div>
-
-      {/* Stripe Customer Portal */}
-      <div className="mt-6">
+      ) : (
         <button
-          className="btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 w-full"
+          className="btn-lg text-lg font-bold text-white bg-green-600 hover:bg-green-700 w-full py-3 rounded-lg shadow-lg"
           onClick={handleCreatePortalSession}
         >
           Manage Subscription
         </button>
-      </div>
+      )}
+    </div>
 
-      {/* Logout Button */}
-      <div className="mt-6">
+  
+      {/* Referral System */}
+      <div className="mt-10 bg-blue-50 p-6 rounded-lg shadow-md">
+        <h2 className="text-lg font-bold mb-2 text-blue-800">Referral Program</h2>
+        <p className="mb-4 text-sm text-blue-600">Share your referral code and earn rewards:</p>
+        <div className="form-input py-2 text-center bg-white border border-blue-200 rounded-lg text-gray-700">{user.referralCode}</div>
         <button
-          className="btn-sm text-sm text-white bg-red-600 hover:bg-red-700 w-full"
+          className="btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 mt-4 w-full py-2 rounded-md"
+          onClick={() => {
+            navigator.clipboard.writeText(
+              `${window.location.origin}/signin?referrer=${user.referralCode}`
+            );
+            setCopySuccess('Referral link copied successfully!');
+            setTimeout(() => setCopySuccess(''), 3000); // Hide success message after 3 seconds
+          }}
+        >
+          Copy Referral Link
+        </button>
+        {copySuccess && <p className="text-green-500 mt-2 text-center">{copySuccess}</p>}
+      </div>
+  
+      {/* Conditionally display Telegram link if tier is above 'Starter' */}
+      {['Starter', 'Growth', 'Business'].includes(user.tier) && (
+        <div className="mt-6">
+          <button
+            className="btn-m text-sm text-white bg-blue-600 hover:bg-blue-700 w-full text-center py-2 rounded-md"
+            onClick={() => window.open('https://t.me/+Khm3XK761_Y1NWI8')}
+          >
+            Join our Telegram
+          </button>
+        </div>
+      )}
+  
+      {/* Account Management Buttons */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+        <button
+          className="btn-m text-m font-bold text-white bg-red-600 hover:bg-red-700 w-full py-2 rounded-md"
           onClick={handleLogout}
         >
           Logout
         </button>
-      </div>
-
-      {/* Delete User Button */}
-      <div className="mt-6">
+  
         <button
-          className="btn-sm text-sm text-white bg-red-600 hover:bg-red-700 w-full"
+          className="btn-m text-m font-bold text-white bg-red-600 hover:bg-red-700 w-full py-2 rounded-md"
           onClick={handleDeleteUser}
         >
           Delete Account
         </button>
       </div>
-
     </div>
   );
+  
+  
 };
 
 export default Dashboard;
