@@ -16,9 +16,6 @@ const Dashboard = () => {
     requestLimit: 0,
     referralCode: '',
     referralPoints: 0,
-    firstName: '',     // Add firstName to user state
-    lastName: '',      // Add lastName to user state
-    username: '',      // Add username to user state
   });
 
   const [loading, setLoading] = useState(true);
@@ -31,15 +28,6 @@ const Dashboard = () => {
   const [emailError, setEmailError] = useState('');
   const [upgradeMessage, setUpgradeMessage] = useState('');
   const router = useRouter();
-
-  // List of subscription tiers in ascending order
-  const subscriptionTiers = ['Free', 'Starter', 'Growth', 'Business', 'Enterprise'];
-  const lookupKeys = {
-    Starter: 'starter',
-    Growth: 'growth',
-    Business: 'business',
-    Enterprise: 'enterprise',
-  };
 
   // Fetch user profile
   const fetchUserProfile = async () => {
@@ -70,10 +58,7 @@ const Dashboard = () => {
             prevUser.requestCount !== newUser.requestCount ||
             prevUser.requestLimit !== newUser.requestLimit ||
             prevUser.referralCode !== newUser.referralCode ||
-            prevUser.referralPoints !== newUser.referralPoints ||
-            prevUser.firstName !== newUser.firstName ||
-            prevUser.lastName !== newUser.lastName ||
-            prevUser.username !== newUser.username;
+            prevUser.referralPoints !== newUser.referralPoints;
   
             // Only return newUser if changes are detected, otherwise keep the old state
             return hasChanges ? newUser : prevUser;
@@ -111,48 +96,6 @@ const Dashboard = () => {
       setEmailToUpdate(email);
       setEmailError(EMAIL_VALIDATION.test(email) ? '' : 'Invalid email format');
     };
-
-  // Upgrade subscription to the next tier
-  const handleUpgradeSubscription = async () => {
-    const currentTierIndex = subscriptionTiers.indexOf(user.tier);
-
-    if (currentTierIndex === subscriptionTiers.length - 1) {
-      setUpgradeMessage('You are already on the highest subscription tier (Enterprise).');
-      return;
-    }
-
-    const nextTier = subscriptionTiers[currentTierIndex + 1] as keyof typeof lookupKeys;
-
-    try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        setError('No token found, please login.');
-        return;
-      }
-
-      const res = await axiosInstance.post(
-        '/payments/create-checkout-session',
-        { lookup_key: lookupKeys[nextTier] },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (res.status === 201 && res.data.url) {
-        window.location.href = res.data.url; // Redirect to the Stripe checkout session
-      } else {
-        setError('Failed to upgrade subscription.');
-      }
-    } catch (err: any) {
-      if (err.response && err.response.status === 400) {
-        setError(err.response.data.message);
-      } else {
-        setError('An error occurred while upgrading subscription.');
-      }
-    }
-  };
 
   // Update email
   const handleUpdateEmail = async () => {
@@ -329,23 +272,6 @@ const Dashboard = () => {
 
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {/* Username */}
-        <div>
-          <label className="block text-sm font-medium mb-1">Username:</label>
-          <div className="form-input py-2 w-full">{user.username || 'N/A'}</div>
-        </div>
-
-        {/* First Name */}
-        <div>
-          <label className="block text-sm font-medium mb-1">First Name:</label>
-          <div className="form-input py-2 w-full">{user.firstName || 'N/A'}</div>
-        </div>
-
-        {/* Last Name */}
-        <div>
-          <label className="block text-sm font-medium mb-1">Last Name:</label>
-          <div className="form-input py-2 w-full">{user.lastName || 'N/A'}</div>
-        </div>
 
         <div>
           <label className="block text-sm font-medium mb-1">Email:</label>
@@ -396,13 +322,6 @@ const Dashboard = () => {
         <div>
           <label className="block text-sm font-medium mb-1">Subscription Tier:</label>
           <div className="form-input py-2 w-full">{user.tier}</div>
-          <button
-            className="mt-2 btn-sm text-sm text-white bg-blue-600 hover:bg-blue-700 w-full"
-            onClick={handleUpgradeSubscription}
-          >
-            Upgrade Subscription
-          </button>
-          {upgradeMessage && <p className="text-green-500 mt-1">{upgradeMessage}</p>}
         </div>
       </div>
 

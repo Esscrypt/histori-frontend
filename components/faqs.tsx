@@ -18,7 +18,7 @@ export default function Faqs() {
               Histori is a platform providing affordable access to historical blockchain data via an easy-to-use API. We support multiple chains and offer various plans to meet your data needs.
             </Accordion>
             <Accordion title="How do I get started with Histori?">
-              To get started, create an account, choose a subscription plan that suits your needs, and use your API key to access historical blockchain data. We also offer a free tier for basic usage.
+              To get started, create an account, choose a subscription plan that suits your needs, and use your API key to access historical blockchain data. We also offer a free trial for basic usage.
             </Accordion>
             <Accordion title="What blockchains do you support?">
               Currently, Histori supports only Ethereum, but we are continuously expanding support to other blockchains based on demand.

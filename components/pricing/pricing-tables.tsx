@@ -75,8 +75,8 @@ export default function PricingTables() {
             <div className="text-lg font-semibold text-slate-800 mb-1">Free</div>
             <div className="inline-flex items-baseline mb-3">
               <span className="h3 font-medium text-slate-500">$</span>
-              <span className="h2 leading-7 font-playfair-display text-slate-800">{annual ? '0' : '0'}</span>
-              <span className="font-medium text-slate-400">{annual ? '/yr' : '/mo'}</span>
+              <span className="h2 leading-7 font-playfair-display text-slate-800">0</span>
+              {/* <span className="font-medium text-slate-400">{annual ? '/yr' : '/mo'}</span> */}
             </div>
             <div className="text-slate-500">
               Ideal for Testing and small-scale experimentation with limited data needs.
@@ -94,7 +94,7 @@ export default function PricingTables() {
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
               </svg>
-              <span>5k API Credits</span>
+              <span>5000 API Requests</span>
             </li>
             <li className="flex items-center">
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
@@ -136,13 +136,13 @@ export default function PricingTables() {
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
               </svg>
-              <span>50k API Credits per month</span>
+              <span>50000 API Requests per month</span>
             </li>
             <li className="flex items-center">
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
               </svg>
-              <span>Full Histori development platform</span>
+              <span>Access to Telegram Support Chat.</span>
             </li>
           </ul>
           <div className="p-3 rounded bg-slate-50">
@@ -172,7 +172,7 @@ export default function PricingTables() {
             </div>
             <div className="text-slate-500">For growing businesses with higher API demands and steady growth.</div>
           </div>
-          <div className="font-medium mb-3">All features of Growth plan:</div>
+          <div className="font-medium mb-3">Bonuses of Starter Plan plus:</div>
           <ul className="text-slate-500 space-y-3 grow mb-6">
             <li className="flex items-center">
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
@@ -184,13 +184,13 @@ export default function PricingTables() {
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
               </svg>
-              <span>300k API Credits per month</span>
+              <span>300000 API Requests per month</span>
             </li>
             <li className="flex items-center">
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
               </svg>
-              <span>Discord chat support</span>
+              <span>Private chat support with 2 work day response time.</span>
             </li>
           </ul>
           <div className="p-3 rounded bg-slate-50">
@@ -219,7 +219,7 @@ export default function PricingTables() {
               Better insights for Larger businesses or enterprises requiring extensive data access.
             </div>
           </div>
-          <div className="font-medium mb-3">All features of Business plan:</div>
+          <div className="font-medium mb-3">Bonuses of Growth Plan plus:</div>
           <ul className="text-slate-500 space-y-3 grow mb-6">
             <li className="flex items-center">
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
@@ -231,13 +231,13 @@ export default function PricingTables() {
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
               </svg>
-              <span>700k API credits per month</span>
+              <span>700000 API Requests per month</span>
             </li>
             <li className="flex items-center">
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
               </svg>
-              <span>Priority integration support</span>
+              <span>Private chat support with 1 work day response time.</span>
             </li>
           </ul>
           <div className="p-3 rounded bg-slate-50">
@@ -257,11 +257,11 @@ export default function PricingTables() {
          <div className="relative flex flex-col h-full px-6 py-5 bg-white shadow-lg" data-aos="fade-up" data-aos-delay="300">
           <div className="mb-4 pb-4 border-b border-slate-200">
             <div className="text-lg font-semibold text-slate-800 mb-1">
-              Custom
+              Enterprice
             </div>
             <div className="inline-flex items-baseline mb-3">
               <span className="h2 leading-7 font-playfair-display text-slate-800">
-                Enterprise
+              Custom
               </span>
             </div>
             <div className="text-slate-500">
@@ -278,7 +278,7 @@ export default function PricingTables() {
               >
                 <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
               </svg>
-              <span>Custom API Requests</span>
+              <span>Custom Requests Per Second</span>
             </li>
             <li className="flex items-center">
               <svg
@@ -288,7 +288,7 @@ export default function PricingTables() {
               >
                 <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
               </svg>
-              <span>Custom API Credits</span>
+              <span>Custom API Limits</span>
             </li>
             <li className="flex items-center">
               <svg
