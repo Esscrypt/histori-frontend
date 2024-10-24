@@ -1,19 +1,39 @@
-export const metadata = {
-  title: 'Home - Histori',
-  description: 'Blockchain historical data retrieval service',
-}
+'use client';
 
-import Hero from '@/components/hero/hero-home'
-import FeaturesBlocks from '@/components/features/features-blocks'
-import Features from '@/components/features/features-home'
-import Features02 from '@/components/features/features-home-02'
-import Features03 from '@/components/features/features-home-03'
-import Target from '@/components/target'
-import PricingSection from '@/components/pricing/pricing'
-import Cta from '@/components/cta/cta'
-import Faqs from '@/components/faqs'
+// Import necessary Next.js and React modules
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+// Metadata for the page
+// export const metadata = {
+//   title: 'Home - Histori',
+//   description: 'Blockchain historical data retrieval service',
+// }
+
+// Importing components
+import Hero from '@/components/hero/hero-home';
+import Target from '@/components/target';
+import PricingSection from '@/components/pricing/pricing';
+import Cta from '@/components/cta/cta';
+import Faqs from '@/components/faqs';
 
 export default function Home() {
+  const router = useRouter();
+
+  // Use useEffect to handle the redirect logic after the component is mounted
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const paymentSuccess = urlParams.get('success') || undefined;
+
+    const authToken = typeof window !== 'undefined' ? localStorage.getItem('token') : null; // Check if auth token exists in localStorage
+
+    // If success=true and user is logged in, redirect to the dashboard
+    if (paymentSuccess === 'true' && authToken) {
+      router.push('/dashboard'); // Redirect to the dashboard
+    }
+    
+  }); // Run the effect when query parameters change
+
   return (
     <>
       <Hero />
@@ -26,5 +46,5 @@ export default function Home() {
       <Faqs />
       <Cta />
     </>
-  )
+  );
 }
