@@ -342,7 +342,7 @@ const Dashboard = () => {
   
     {/* Conditionally display subscription button */}
     <div className="mt-8">
-      {user.tier === 'Free' ? (
+      {['Free', 'None'].includes(user.tier) ? (
         <button
           className="btn-lg text-lg font-bold text-white bg-green-600 hover:bg-green-700 w-full py-3 rounded-lg shadow-lg"
           onClick={async () => {
