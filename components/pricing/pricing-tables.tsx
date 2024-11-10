@@ -119,7 +119,7 @@ export default function PricingTables() {
             <div className="text-lg font-semibold text-slate-800 mb-1">Starter</div>
             <div className="inline-flex items-baseline mb-3">
               <span className="h3 font-medium text-slate-500">$</span>
-              <span className="h2 leading-7 font-playfair-display text-slate-800">{annual ? '45' : '50'}</span>
+              <span className="h2 leading-7 font-playfair-display text-slate-800">{annual ? '540' : '50'}</span>
               <span className="font-medium text-slate-400">{annual ? '/yr' : '/mo'}</span>
             </div>
             <div className="text-slate-500">Better insights for startups or small applications requiring moderate API usage.</div>
@@ -167,7 +167,7 @@ export default function PricingTables() {
             <div className="text-lg font-semibold text-slate-800 mb-1">Growth</div>
             <div className="inline-flex items-baseline mb-3">
               <span className="h3 font-medium text-slate-500">$</span>
-              <span className="h2 leading-7 font-playfair-display text-slate-800">{annual ? '180' : '200'}</span>
+              <span className="h2 leading-7 font-playfair-display text-slate-800">{annual ? '2160' : '200'}</span>
               <span className="font-medium text-slate-400">{annual ? '/yr' : '/mo'}</span>
             </div>
             <div className="text-slate-500">For growing businesses with higher API demands and steady growth.</div>
@@ -212,7 +212,7 @@ export default function PricingTables() {
             <div className="text-lg font-semibold text-slate-800 mb-1">Business</div>
             <div className="inline-flex items-baseline mb-3">
               <span className="h3 font-medium text-slate-500">$</span>
-              <span className="h2 leading-7 font-playfair-display text-slate-800">{annual ? '360' : '400'}</span>
+              <span className="h2 leading-7 font-playfair-display text-slate-800">{annual ? '4320' : '400'}</span>
               <span className="font-medium text-slate-400">{annual ? '/yr' : '/mo'}</span>
             </div>
             <div className="text-slate-500">

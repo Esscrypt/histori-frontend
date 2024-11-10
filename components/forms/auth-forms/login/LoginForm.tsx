@@ -7,6 +7,9 @@ import { useDebounce } from '@/lib/utils/useDebounce';
 import { EMAIL_VALIDATION } from '@/config';
 import { ethers } from 'ethers';
 
+// import { ConnectButton } from '@rainbow-me/rainbowkit';
+// import { useConnect, useAccount, useSignMessage, useDisconnect } from 'wagmi';
+
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,6 +27,12 @@ const LoginForm = () => {
   const searchParams = useSearchParams(); // Get query parameters
   const debouncedEmail = useDebounce(email, 500);
   const debouncedPassword = useDebounce(password, 500);
+
+  // const { connect, connectors } = useConnect();
+  // const { address, isConnected } = useAccount();
+  // const { signMessageAsync } = useSignMessage();
+  // const { disconnect } = useDisconnect();
+
 
   const validateEmail = (email: string) => {
     if (!EMAIL_VALIDATION.test(email) && email.length > 0) {

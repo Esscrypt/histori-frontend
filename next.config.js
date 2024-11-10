@@ -12,6 +12,11 @@ let nextConfig = {
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   // Optionally, add any other Next.js config below
   reactStrictMode: true,
+  env: {
+    HST_TOKEN_ADDRESS: process.env.HST_TOKEN_ADDRESS,
+    DEPOSIT_ADDRESS: process.env.DEPOSIT_ADDRESS,
+    ENV: process.env.ENV,
+  }
   // images: {
   //   unoptimized: true,
   // },
