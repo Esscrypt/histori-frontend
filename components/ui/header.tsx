@@ -80,7 +80,7 @@ export default function Header({ mode = 'dark' }: { mode?: string }) {
               )}
               <li>
                 <Link
-                  href="https://docs.histori.xyz/docs/demo"
+                  href="https://docs.histori.xyz/docs/start/demo"
                   className="font-medium text-blue-600 dark:text-slate-300 dark:hover:text-white px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out group"
                 >
                   Get Started{' '}

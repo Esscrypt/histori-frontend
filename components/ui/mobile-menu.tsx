@@ -121,7 +121,7 @@ export default function MobileMenu() {
 
             <li>
               <Link
-                href="https://docs.histori.xyz/docs/demo"
+                href="https://docs.histori.xyz/docs/start/demo"
                 className="flex font-medium text-blue-600 py-2 group"
                 onClick={() => setMobileNavOpen(false)}
               >
