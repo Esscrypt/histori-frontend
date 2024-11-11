@@ -21,7 +21,7 @@ export default function HeroHome() {
               </p>
               <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
                 <div>
-                  <Link className="btn text-white bg-blue-600 hover:bg-blue-700 w-full group" href="https://docs.histori.xyz/docs/demo">
+                  <Link className="btn text-white bg-blue-600 hover:bg-blue-700 w-full group" href="https://docs.histori.xyz/docs/start/demo">
                     See our Demo <span className="tracking-normal text-blue-300 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                   </Link>
                 </div>
