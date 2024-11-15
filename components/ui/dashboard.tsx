@@ -562,7 +562,7 @@ const Dashboard = () => {
               <p className="text-gray-800 py-2">{user.referralPoints}</p>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            {/* <div className="bg-white p-6 rounded-lg shadow-md">
               <label className="block text-gray-700 font-medium mb-1">API Key</label>
               <div className="flex items-center justify-between bg-gray-100 p-3 rounded-md">
                 <span className="text-gray-800 truncate">{apiKeyVisible ? user.apiKeyValue : '••••••••••••••••'}</span>
@@ -576,7 +576,7 @@ const Dashboard = () => {
                 </div>
               </div>
               {apiKeyCopySuccess && <p className="text-green-500 text-sm mt-1">{apiKeyCopySuccess}</p>}
-            </div>
+            </div> */}
 
             <div className="bg-white p-6 rounded-lg shadow-md">
               <label className="block text-gray-700 font-medium mb-1">Project ID</label>
