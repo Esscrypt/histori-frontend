@@ -92,7 +92,16 @@ export default function MobileMenu() {
                 className="flex font-medium text-slate-800 hover:text-blue-600 py-2"
                 onClick={() => setMobileNavOpen(false)}
               >
-                Pricing
+                REST API Pricing
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/pricing-multinode"
+                className="flex font-medium text-slate-800 hover:text-blue-600 py-2"
+                onClick={() => setMobileNavOpen(false)}
+              >
+                Archival MultiNode Pricing
               </Link>
             </li>
 

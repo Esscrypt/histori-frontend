@@ -4,7 +4,7 @@ import { useState } from 'react';
 import axiosInstance from '@/lib/axios/axiosInstance';
 import { useRouter } from 'next/navigation';
 
-export default function PricingTables() {
+export default function PricingTablesMultinode() {
   const [annual, setAnnual] = useState<boolean>(false);
   const router = useRouter(); // Using router for redirection
 
@@ -88,13 +88,13 @@ export default function PricingTables() {
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
               </svg>
-              <span>5 Requests Per Second</span>
+              <span>5 Requests per second</span>
             </li>
             <li className="flex items-center">
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
               </svg>
-              <span>5000 API Requests</span>
+              <span>5000 Requests</span>
             </li>
             <li className="flex items-center">
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
@@ -130,13 +130,13 @@ export default function PricingTables() {
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
               </svg>
-              <span>50 Requests Per Second</span>
+              <span>50 Requests per second</span>
             </li>
             <li className="flex items-center">
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
               </svg>
-              <span>50000 API Requests Per Month</span>
+              <span>4 Million Requests Per Month</span>
             </li>
             <li className="flex items-center">
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
@@ -148,7 +148,7 @@ export default function PricingTables() {
           <div className="p-3 rounded bg-slate-50">
             <button
               className="btn-sm text-white bg-blue-600 hover:bg-blue-700 w-full group"
-              onClick={() => handleCheckoutSession('starter')}
+              onClick={() => handleCheckoutSession('starter-multinode')}
             >
               Get Started
               <span className="tracking-normal text-blue-300 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
@@ -178,13 +178,13 @@ export default function PricingTables() {
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
               </svg>
-              <span>50 Requests Per Second</span>
+              <span>50 Requests per second</span>
             </li>
             <li className="flex items-center">
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
               </svg>
-              <span>300000 API Requests Per Month</span>
+              <span>17 Million Requests Per Month</span>
             </li>
             <li className="flex items-center">
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
@@ -196,7 +196,7 @@ export default function PricingTables() {
           <div className="p-3 rounded bg-slate-50">
             <button
               className="btn-sm text-white bg-blue-600 hover:bg-blue-700 w-full group"
-              onClick={() => handleCheckoutSession('growth')}
+              onClick={() => handleCheckoutSession('growth-multinode')}
             >
               Get Started
               <span className="tracking-normal text-blue-300 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
@@ -225,13 +225,13 @@ export default function PricingTables() {
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
               </svg>
-              <span>50 Requests Per Second</span>
+              <span>50 Requests per second</span>
             </li>
             <li className="flex items-center">
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
               </svg>
-              <span>700000 API Requests Per Month</span>
+              <span>35 Million Requests Per Month</span>
             </li>
             <li className="flex items-center">
               <svg className="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
@@ -243,7 +243,7 @@ export default function PricingTables() {
           <div className="p-3 rounded bg-slate-50">
             <button
               className="btn-sm text-white bg-blue-600 hover:bg-blue-700 w-full group"
-              onClick={() => handleCheckoutSession('business')}
+              onClick={() => handleCheckoutSession('business-multinode')}
             >
               Get Started
               <span className="tracking-normal text-blue-300 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">

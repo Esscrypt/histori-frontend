@@ -1,6 +1,6 @@
-import PricingTables from '../pricing/pricing-tables';
+import PricingTablesMultinode from '../pricing/pricing-tables-multinode';
 
-export default function HeroPricing() {  
+export default function HeroPricingMultinode() {  
   return (
     <section className="relative">
 
@@ -15,7 +15,7 @@ export default function HeroPricing() {
             <h1 className="h1 font-playfair-display text-slate-100">Unlock top-tier blockchain data with zero friction. Start now!</h1>
           </div>
 
-          <PricingTables />
+          <PricingTablesMultinode />
 
         </div>
       </div>
