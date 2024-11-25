@@ -122,7 +122,7 @@ export default function PricingTablesMultinode() {
               <span className="h2 leading-7 font-playfair-display text-slate-800">{annual ? '540' : '50'}</span>
               <span className="font-medium text-slate-400">{annual ? '/yr' : '/mo'}</span>
             </div>
-            <div className="text-slate-500">Better insights for startups or small applications requiring moderate API usage.</div>
+            <div className="text-slate-500">Perfect for developers and small projects exploring blockchain data with a limited budget. Ideal for testing and early-stage applications.</div>
           </div>
           <div className="font-medium mb-3">Features include:</div>
           <ul className="text-slate-500 space-y-3 grow mb-6">
@@ -170,7 +170,7 @@ export default function PricingTablesMultinode() {
               <span className="h2 leading-7 font-playfair-display text-slate-800">{annual ? '2160' : '200'}</span>
               <span className="font-medium text-slate-400">{annual ? '/yr' : '/mo'}</span>
             </div>
-            <div className="text-slate-500">For growing businesses with higher API demands and steady growth.</div>
+            <div className="text-slate-500">Designed for scaling projects, offering increased capacity and reliability for teams building production-ready blockchain apps.</div>
           </div>
           <div className="font-medium mb-3">Bonuses of Starter Plan plus:</div>
           <ul className="text-slate-500 space-y-3 grow mb-6">
@@ -216,7 +216,7 @@ export default function PricingTablesMultinode() {
               <span className="font-medium text-slate-400">{annual ? '/yr' : '/mo'}</span>
             </div>
             <div className="text-slate-500">
-              Better insights for Larger businesses or enterprises requiring extensive data access.
+            Tailored for enterprises needing top-tier performance, enhanced stability, and premium support for mission-critical blockchain applications.
             </div>
           </div>
           <div className="font-medium mb-3">Bonuses of Growth Plan plus:</div>

@@ -12,7 +12,7 @@ export default function HeroPricingMultinode() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12">
-            <h1 className="h1 font-playfair-display text-slate-100">Unlock top-tier blockchain data with zero friction. Start now!</h1>
+            <h1 className="h1 font-playfair-display text-slate-100">The most secure, untracked, and reliable access to RPC services. Ensure seamless connectivity to blockchain networks, even in the face of node failures.</h1>
           </div>
 
           <PricingTablesMultinode />
