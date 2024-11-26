@@ -194,8 +194,14 @@ const LoginForm = () => {
     }
 
     // OAuth2 flow: check for the code and exchange it for an access token
-    const code = urlParams.get('code');
-    const provider = urlParams.get('provider');
+    let code = urlParams.get('code');
+    const jwt = urlParams.get('jwt');
+    let provider = urlParams.get('provider');
+
+    if(jwt) {
+      provider = "jwt"
+      code = jwt
+    }
 
     if (code && provider) {
       exchangeOAuthCode(provider, code);
