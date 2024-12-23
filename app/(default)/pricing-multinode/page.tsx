@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Archival MultiNode Pricing - Histori',
-  description: 'Pricing for the Histori Archival MultiNode',
+  title: 'RPC Router Pricing - Histori',
+  description: 'Pricing for the Histori MultiNode - RPC Router',
 }
 
 import HeroPricingMultinode from '@/components/hero/hero-pricing-multinode'

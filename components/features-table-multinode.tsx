@@ -22,10 +22,10 @@ export default function FeaturesMultinodeTable() {
                 <thead>
                   <tr className="text-base sm:text-lg text-slate-800">
                     <th className="text-xl md:text-2xl whitespace-nowrap font-bold font-playfair-display text-left pr-2 py-4 min-w-[10rem] md:min-w-[24rem]">Histori Plans</th>
-                    <th className="text-bold text-center px-2 py-4">Free Archival MultiNode</th>
-                    <th className="text-bold text-center px-2 py-4">Starter Archival MultiNode</th>
-                    <th className="text-bold text-center px-2 py-4">Growth Archival MultiNode</th>
-                    <th className="text-bold text-center px-2 py-4">Business Archival MultiNode</th>
+                    <th className="text-bold text-center px-2 py-4">Free MultiNode RPC Router</th>
+                    <th className="text-bold text-center px-2 py-4">Starter MultiNode RPC Router</th>
+                    <th className="text-bold text-center px-2 py-4">Growth MultiNode RPC Router</th>
+                    <th className="text-bold text-center px-2 py-4">Business MultiNode RPC Router</th>
                     <th className="text-bold text-center px-2 py-4">Enterprise</th>
                   </tr>
                 </thead>
@@ -104,9 +104,9 @@ export default function FeaturesMultinodeTable() {
                       </div>
                     </td>
                     <td className="text-sm px-2 py-4 text-center italic text-slate-800">5000</td>
-                    <td className="text-sm px-2 py-4 text-center italic text-slate-800">4000000</td>
+                    <td className="text-sm px-2 py-4 text-center italic text-slate-800">2000000</td>
+                    <td className="text-sm px-2 py-4 text-center italic text-slate-800">8000000</td>
                     <td className="text-sm px-2 py-4 text-center italic text-slate-800">17000000</td>
-                    <td className="text-sm px-2 py-4 text-center italic text-slate-800">35000000</td>
                     <td className="text-sm px-2 py-4 text-center italic text-slate-800">Custom</td>
                   </tr>
                  
