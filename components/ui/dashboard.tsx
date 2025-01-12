@@ -723,7 +723,7 @@ const Dashboard = () => {
           )}
 
           {/* Starter Plan Subscription Button with Stripe */}
-          {["None", "Free"].includes(user.tier) && (
+          {/* {["None", "Free"].includes(user.tier) && (
             <div className="mt-8 text-center">
               <button
                 className="w-full py-4 text-lg font-semibold text-white bg-green-600 rounded-lg shadow-md hover:bg-green-700 transition-all"
@@ -732,7 +732,7 @@ const Dashboard = () => {
                 Subscribe to Starter Plan With Stripe
               </button>
             </div>
-          )}
+          )} */}
         </div>
       )}
 
@@ -795,7 +795,7 @@ const Dashboard = () => {
           )}
 
           {/* Starter Plan Subscription Button with Stripe */}
-          {["None", "Free Archival MultiNode"].includes(user.rpcTier) && (
+          {/* {["None", "Free Archival MultiNode"].includes(user.rpcTier) && (
             <div className="mt-8 text-center">
               <button
                 className="w-full py-4 text-lg font-semibold text-white bg-green-600 rounded-lg shadow-md hover:bg-green-700 transition-all"
@@ -804,7 +804,7 @@ const Dashboard = () => {
                 Subscribe to Starter Archival MultiNode Plan With Stripe
               </button>
             </div>
-          )}
+          )} */}
         </div>
       )}
 

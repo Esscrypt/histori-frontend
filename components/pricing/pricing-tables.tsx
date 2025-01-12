@@ -22,18 +22,21 @@ export default function PricingTables() {
       return;
     }
 
-    try {
-      const response = await axiosInstance.post('/payments/create-checkout-session', { lookup_key: lookupKey });
-      const session = response.data;
+    //HACK: temporarily disable FIAT payments
+    router.push('/dashboard');
 
-      if (session.url) {
-        window.location.href = session.url; // Redirect to Stripe Checkout
-      } else {
-        console.error('Error creating checkout session:', session.error);
-      }
-    } catch (error) {
-      console.error('Error creating checkout session:', error);
-    }
+    // try {
+    //   const response = await axiosInstance.post('/payments/create-checkout-session', { lookup_key: lookupKey });
+    //   const session = response.data;
+
+    //   if (session.url) {
+    //     window.location.href = session.url; // Redirect to Stripe Checkout
+    //   } else {
+    //     console.error('Error creating checkout session:', session.error);
+    //   }
+    // } catch (error) {
+    //   console.error('Error creating checkout session:', error);
+    // }
   };
 
   const handleContactUsRedirect = () => {
